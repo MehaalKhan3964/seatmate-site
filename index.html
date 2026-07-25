@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seatmate</title>
+<style>
+  :root {
+    --bg: #E8EAF0;
+    --surface: #F0F2F8;
+    --shadow-dark: #C5C7CC;
+    --shadow-light: #FFFFFF;
+    --text: #2E3040;
+    --text-muted: #585A68;
+    --primary: #6366F1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text-muted);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 40px 44px;
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+  }
+  h1 { color: var(--text); font-size: 1.6rem; margin: 0 0 6px; }
+  h1 span { color: var(--primary); }
+  p { margin: 0 0 24px; line-height: 1.6; }
+  .links { display: flex; flex-direction: column; gap: 12px; }
+  a.link {
+    display: block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  a.link:hover { color: var(--primary); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Seat<span>mate</span></h1>
+    <p>Ride sharing in Islamabad &amp; Rawalpindi.</p>
+    <div class="links">
+      <a class="link" href="privacy-policy.html">Privacy Policy</a>
+      <a class="link" href="terms-of-service.html">Terms of Service</a>
+      <a class="link" href="data-deletion.html">Data Deletion</a>
+    </div>
+  </div>
+</body>
+</html>
