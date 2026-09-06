@@ -10,8 +10,14 @@ procedure for cutting one.
 | The APK binary | **GitHub Releases on this repo** (`sukablud/seatmate-site`) | This repo is public, so release assets download without a token. `sukablud/ride_share_main_app` is **private** — its release assets 404 for everyone but the owner and are useless for distribution. |
 | `latest.json` | This repo, served by Pages at `https://seatmate.com.pk/latest.json` | The app polls it at launch to decide whether to prompt for a native update. |
 
-**Never commit the APK into this repo.** It is ~60–90MB and GitHub Pages is not
-a binary host. It goes on a Release; only the pointer lives in git.
+**Never commit the APK into this repo.** The first build measured **117MB** and
+GitHub Pages is not a binary host. It goes on a Release; only the pointer lives
+in git.
+
+> **117MB is a lot to ask of a user on mobile data in Islamabad.** The build is
+> a single universal APK carrying every ABI. Enabling ABI splits (or shipping
+> per-architecture APKs) would cut it substantially. Not done yet — noted here
+> because it is a download-conversion problem, not just a hosting detail.
 
 ## Cutting a release
 
@@ -31,9 +37,19 @@ a binary host. It goes on a Release; only the pointer lives in git.
    apksigner verify --print-certs seatmate-<version>.apk
    ```
 
-   The SHA-1 must be `7F:B5:EB:41:03:96:A4:D4:45:A4:15:A2:63:B2:14:07:79:C1:8B:60`
-   — the EAS release keystore. If it shows `5E:8F:16:06:…:F6:25` that is the
-   **debug** keystore, which is a publicly known key. **Do not publish it.**
+   The SHA-1 must be `7fb5eb410396a4d445a415a263b2140779c18b60` — the EAS
+   release keystore. If it shows `5e8f16062ea3cd2c4a0d547876baa6f38cabf625`
+   that is the **debug** keystore, a publicly known key. **Do not publish it.**
+
+   Confirmed on the first `production-apk` build (2026-09-06): EAS signs with
+   the release keystore and the local `signingConfigs.debug` in
+   `android/app/build.gradle` is irrelevant to cloud builds — EAS never
+   receives that directory (it is gitignored) and prebuilds its own. Check
+   anyway on every release; it is ten seconds and it is the one thing that
+   cannot be undone after users install.
+
+   `apksigner` lives at `~/Android/Sdk/build-tools/36.0.0/apksigner` — it is
+   not on `PATH`.
 
 3. **Create the GitHub Release** on this repo, tagged `v<versionName>`, and
    attach the APK as `seatmate-<versionName>.apk`.
@@ -66,7 +82,7 @@ A change that touches no native code ships over the air and users get it on
 next launch:
 
 ```bash
-eas update --branch production
+eas update --channel production-web --message "what changed"
 ```
 
 ### Channels — read this once
@@ -79,23 +95,32 @@ The two production builds carry **different EAS Update channels**, declared in
 | `production-apk` | `production-web` | the APK from this site |
 | `production` | `production-play` | a future Play Store listing |
 
-They are deliberately distinct, because the app has to be able to tell them
-apart at runtime: the update banner must appear **only** on web installs, and
-any future out-of-store payment path must too (Play Billing is mandatory for
-digital subscriptions inside a Play binary). The app reads this via
-`Updates.channel` — build-time native config that an OTA cannot overwrite.
+They are deliberately distinct, because the app has to tell them apart at
+runtime: the update banner must appear **only** on web installs, and any future
+out-of-store payment path must too (Play Billing is mandatory for digital
+subscriptions inside a Play binary). The app reads this via `Updates.channel` —
+build-time native config that an OTA cannot overwrite.
 
-Point both channels at the same branch so one publish serves both:
+**EAS creates the channel and a same-named branch automatically** on the first
+build using that profile. Verified 2026-09-06: the first `production-apk` build
+printed `Created update channel "production-web"`, and `eas channel:list` shows
+`production-web → branch production-web`. Nothing needs creating by hand.
+
+`production-play` **does not exist yet** — it appears on the first `production`
+build. Until then there is nothing to publish to it.
+
+**Use `--channel`, not `--branch`, unless you know the mapping.** Publishing to
+a branch that no channel points at is accepted, succeeds, and reaches nobody —
+the single most confusing failure in this system, because everything reports
+success. Confirm with:
 
 ```bash
-eas channel:edit production-web  --branch production
-eas channel:edit production-play --branch production
+eas channel:list
 ```
 
-**A build profile with no channel receives no updates at all** — expo-updates
-ships present but inert, and nothing surfaces the problem until an OTA you
-published silently never arrives. `npm run verify:app-update` asserts both
-profiles declare one.
+**A build profile with no channel at all receives no updates either** —
+expo-updates ships present but inert. `npm run verify:app-update` asserts both
+production profiles declare one.
 
 Only cut a new APK when native code actually changes — a new native module, an
 SDK upgrade, a permission change.
