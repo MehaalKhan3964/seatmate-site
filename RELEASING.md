@@ -7,17 +7,18 @@ procedure for cutting one.
 
 | Thing | Where | Why there |
 |---|---|---|
-| The APK binary | **GitHub Releases on this repo** (`sukablud/seatmate-site`) | This repo is public, so release assets download without a token. `sukablud/ride_share_main_app` is **private** — its release assets 404 for everyone but the owner and are useless for distribution. |
+| The APK binary | **GitHub Releases on this repo** (`MehaalKhan3964/seatmate-site`) | This repo is public, so release assets download without a token. `MehaalKhan3964/ride_share_main_app` is **private** — its release assets 404 for everyone but the owner and are useless for distribution. |
 | `latest.json` | This repo, served by Pages at `https://seatmate.com.pk/latest.json` | The app polls it at launch to decide whether to prompt for a native update. |
 
-**Never commit the APK into this repo.** The first build measured **117MB** and
-GitHub Pages is not a binary host. It goes on a Release; only the pointer lives
-in git.
+**Never commit the APK into this repo.** GitHub Pages is not a binary host. It
+goes on a Release; only the pointer lives in git.
 
-> **117MB is a lot to ask of a user on mobile data in Islamabad.** The build is
-> a single universal APK carrying every ABI. Enabling ABI splits (or shipping
-> per-architecture APKs) would cut it substantially. Not done yet — noted here
-> because it is a download-conversion problem, not just a hosting detail.
+> The first build (2026-09-06) measured 117MB as a single universal APK
+> carrying every ABI. `v1.0.0` (versionCode 6, 2026-09-08) dropped x86/x86_64
+> and enabled R8, bringing it to **59.8MB** with `arm64-v8a` +
+> `armeabi-v7a` only — real Android hardware in Islamabad is one of those two.
+> If a build ever needs x86 back (an emulator-only debug path, say), reconsider
+> this note.
 
 ## Cutting a release
 
@@ -52,15 +53,20 @@ in git.
    not on `PATH`.
 
 3. **Create the GitHub Release** on this repo, tagged `v<versionName>`, and
-   attach the APK as `seatmate-<versionName>.apk`.
+   attach the APK as `seatmate-<versionName>-vc<versionCode>.apk` — the
+   versionCode suffix matters because `versionName` alone repeats across
+   builds (autoIncrement only bumps `versionCode`; a run of pure-native or
+   pure-config changes can ship several builds under the same `1.0.0`), and
+   two releases can't share one asset filename. `v1.0.0` (2026-09-08) is
+   `seatmate-1.0.0-vc6.apk`.
 
 4. **Update `latest.json`** and push. It must match the release exactly:
 
    ```json
    {
-     "versionCode": 2,
+     "versionCode": 7,
      "versionName": "1.0.1",
-     "apkUrl": "https://github.com/sukablud/seatmate-site/releases/download/v1.0.1/seatmate-1.0.1.apk",
+     "apkUrl": "https://github.com/MehaalKhan3964/seatmate-site/releases/download/v1.0.1/seatmate-1.0.1-vc7.apk",
      "notes": "What changed, one short line."
    }
    ```
@@ -70,7 +76,7 @@ in git.
      `apksigner`/`aapt`. Getting this wrong is the whole failure mode — the app
      compares on this number alone.
    - `apkUrl` **must** start with
-     `https://github.com/sukablud/seatmate-site/releases/download/`. The app
+     `https://github.com/MehaalKhan3964/seatmate-site/releases/download/`. The app
      refuses any other host outright (`utils/appUpdate.ts` → `APK_URL_PREFIX`),
      because this URL is handed to users with "install this".
    - `notes`, when non-empty, replaces the generic prompt text in the banner.
