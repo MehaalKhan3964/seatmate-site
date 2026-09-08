@@ -49,6 +49,17 @@
     font-size: 0.95rem;
   }
   a.link:hover { color: var(--primary); }
+  a.download {
+    background: var(--primary);
+    color: #fff;
+  }
+  a.download:hover { color: #fff; opacity: 0.92; }
+  .download-note {
+    margin: -4px 0 8px;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
   footer {
     margin-top: 24px;
     padding-top: 16px;
@@ -67,6 +78,11 @@
     <h1>Seat<span>mate</span></h1>
     <p>Ride sharing in Islamabad &amp; Rawalpindi.</p>
     <div class="links">
+      <a class="link download" id="download-link"
+         href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
+        Download for Android
+      </a>
+      <p class="download-note">Android only. You may need to allow "install unknown apps" when prompted.</p>
       <a class="link" href="privacy-policy.html">Privacy Policy</a>
       <a class="link" href="terms-of-service.html">Terms of Service</a>
       <a class="link" href="data-deletion.html">Data Deletion</a>
@@ -78,5 +94,24 @@
       House 1027, Street 77, D-12/1, Islamabad, Pakistan
     </footer>
   </div>
+  <script>
+    // The button's href above is a safe fallback (GitHub's own "latest
+    // release" redirect) in case this fails. When it works, point it at the
+    // exact asset from latest.json instead — the same file the app itself
+    // checks — and show the version so people know what they're installing.
+    fetch('latest.json?_=' + Date.now(), { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((latest) => {
+        var el = document.getElementById('download-link');
+        if (!el || !latest || typeof latest.apkUrl !== 'string') return;
+        el.href = latest.apkUrl;
+        if (latest.versionName) {
+          el.textContent = 'Download for Android (v' + latest.versionName + ')';
+        }
+      })
+      .catch(function () {
+        // Fallback href already in the markup. Nothing to do.
+      });
+  </script>
 </body>
 </html>
