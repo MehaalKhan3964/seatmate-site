@@ -88,8 +88,23 @@ A change that touches no native code ships over the air and users get it on
 next launch:
 
 ```bash
-eas update --channel production-web --message "what changed"
+eas update --channel production-web --platform android --message "what changed"
 ```
+
+**`--platform android` is required, not optional, as of the PagerView tab
+migration (2026-09-07).** `eas update` bundles for `all` (android + ios + web)
+by default, and the web bundle now fails outright:
+`react-native-pager-view` imports `codegenNativeCommands` from
+`react-native/Libraries/Utilities`, which the web bundler refuses — "Importing
+react-native internals is not supported on web." This app never ships a web
+build, so there is nothing lost by scoping to android; omitting the flag just
+makes the whole publish fail with no update going out at all. Confirmed
+2026-09-08: the bare command errored, `--platform android` published cleanly.
+
+**Two-relaunch rule:** `EXPO_UPDATES_CHECK_ON_LAUNCH=ALWAYS` +
+`EXPO_UPDATES_LAUNCH_WAIT_MS=0` means the update downloads in the background on
+the *first* relaunch after a publish and only applies on the *second*. Don't
+tell anyone (including yourself) that a publish "didn't work" off one reopen.
 
 ### Channels — read this once
 
