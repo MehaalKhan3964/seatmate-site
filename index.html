@@ -60,6 +60,20 @@
     line-height: 1.5;
     color: var(--text-muted);
   }
+  .download-note strong { color: var(--text); font-weight: 600; }
+  /* Shown only when we think we're inside another app's browser. */
+  .inapp-warn {
+    display: none;
+    margin: -4px 0 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--bg);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text);
+    text-align: left;
+  }
+  .inapp-warn.show { display: block; }
   footer {
     margin-top: 24px;
     padding-top: 16px;
@@ -82,7 +96,17 @@
          href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
         Download for Android
       </a>
-      <p class="download-note">Android only. You may need to allow "install unknown apps" when prompted.</p>
+      <p class="inapp-warn" id="inapp-warn">
+        You're browsing inside another app. Downloads often stall here —
+        <strong>open this page in Chrome</strong> before downloading.
+      </p>
+      <p class="download-note">
+        Android only. You may need to allow "install unknown apps" when prompted.<br>
+        <strong>If the download looks stuck near the end and still says
+        "downloading", it has actually finished.</strong> Open
+        <strong>Chrome &rsaquo; Downloads</strong> (or pull down your
+        notifications) and tap the file to install it.
+      </p>
       <a class="link" href="privacy-policy.html">Privacy Policy</a>
       <a class="link" href="terms-of-service.html">Terms of Service</a>
       <a class="link" href="data-deletion.html">Data Deletion</a>
@@ -94,6 +118,44 @@
       House 1027, Street 77, D-12/1, Islamabad, Pakistan
     </footer>
   </div>
+  <script>
+    // Android in-app browsers (the stripped-down Chrome you get when you tap a
+    // link inside WhatsApp, Instagram, Facebook, …) are a Chrome Custom Tab or
+    // a raw WebView. They can download a file but routinely fail to hand the
+    // finished APK to Android's package installer, so the bar reaches 100%,
+    // the label stays "downloading", and nothing ever offers to install it.
+    //
+    // There is no way to fix that from inside the frame. The only real fix is
+    // to leave it, which on Android means an `intent://` URL naming Chrome as
+    // the target package — the system then hands the download to real Chrome
+    // and its download manager.
+    function isAndroidInAppBrowser() {
+      var ua = navigator.userAgent || '';
+      if (!/Android/i.test(ua)) return false;
+      // '; wv' is the WebView marker; the rest are apps that ship their own
+      // browser and don't always set it. This list is necessarily incomplete,
+      // which is why the visible note below has to stand on its own.
+      return /; wv\)|FBAN|FBAV|Instagram|Line\/|WhatsApp|Snapchat|Twitter|TikTok|Messenger/i.test(ua);
+    }
+
+    function escapeInAppBrowser(el, apkUrl) {
+      if (!isAndroidInAppBrowser()) return;
+
+      var warn = document.getElementById('inapp-warn');
+      if (warn) warn.className = 'inapp-warn show';
+
+      // intent://<host+path>#Intent;scheme=https;package=<chrome>;...;end
+      // The scheme is carried in `scheme=`, NOT left on the URI — and the
+      // fallback must be encoded, or the ';' and '&' in GitHub's signed
+      // redirect terminate the intent early and the button does nothing.
+      var stripped = apkUrl.replace(/^https?:\/\//, '');
+      el.href =
+        'intent://' + stripped +
+        '#Intent;scheme=https;package=com.android.chrome' +
+        ';S.browser_fallback_url=' + encodeURIComponent(apkUrl) +
+        ';end';
+    }
+  </script>
   <script>
     // The button's href above is a safe fallback (GitHub's own "latest
     // release" redirect) in case this fails. When it works, point it at the
@@ -108,6 +170,7 @@
         if (latest.versionName) {
           el.textContent = 'Download for Android (v' + latest.versionName + ')';
         }
+        escapeInAppBrowser(el, latest.apkUrl);
       })
       .catch(function () {
         // Fallback href already in the markup. Nothing to do.
