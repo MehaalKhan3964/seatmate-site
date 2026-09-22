@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "pk.seatmate.app",
+      "sha256_cert_fingerprints": [
+        "BF:ED:F1:C3:DD:F1:9A:5E:A9:72:E8:35:5F:DA:4C:87:68:E7:EB:C4:59:0A:7F:EE:C8:7A:73:AF:B6:66:F3:DF"
+      ]
+    }
+  }
+]
