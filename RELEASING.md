@@ -152,3 +152,25 @@ SDK upgrade, a permission change.
 `expo prebuild` would normally keep those in sync, but it is banned in that repo
 because `android/` is hand-edited. Changing only `app.config.js` silently leaves
 the native build reporting the old runtime version.
+
+## Checking the site
+
+Before every change to the site:
+
+```bash
+node scripts/check-site.mjs
+```
+
+It needs no dependencies and checks every page for language, title, viewport, description (50 to 200 characters) and its own canonical URL; the shared `site.css`; no third-party script, stylesheet or font; local links and anchors; the sitemap (exactly the four indexable pages); robots.txt; `latest.json` and `.well-known/assetlinks.json`; that the download button, the `latest.json` lookup and the in-app-browser escape are still there; and that the contact addresses are `support@` and `privacy@seatmate.com.pk` everywhere.
+
+It does **not** test the live domain or the layout. After a deploy, check by hand (last done 2026-10-13):
+
+- `https://seatmate.com.pk/` and the three policy pages return 200; `https://www.seatmate.com.pk/` redirects to the apex (it did); an unknown path returns 404 with the landing page.
+- `https://seatmate.com.pk/latest.json` and `.well-known/assetlinks.json` return 200 as JSON, and the `apkUrl` in `latest.json` returns the APK (it did: 59,797,789 bytes).
+- **Open item (not fixable in this repository):** plain `http://seatmate.com.pk/` answers 200 instead of redirecting to HTTPS. Switch on "Enforce HTTPS" in the repository's Pages settings and/or "Always Use HTTPS" in the Cloudflare zone (the owner holds both accounts).
+- **Open item:** `assetlinks.json` is published, but the app declares only custom URL schemes (no https host), so Android App Links are not active. Either add the https intent filter with `autoVerify` and verify it on a device, or remove `assetlinks.json` until then.
+- **Open item:** there is no social-sharing image (`og:image`). Add one made for Seatmate; do not reuse the parent company's.
+
+## Design
+
+`site.css` is the one stylesheet. Its tokens follow the app (cream paper, deep green primary, rust accent) and the parent company site almishqun.com (warm paper, ink and rust accent, hairline borders, flat surfaces). System fonts only. A dark scheme follows the visitor's setting. The legal text on the policy pages is unchanged; only the presentation and metadata changed.

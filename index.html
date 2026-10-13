@@ -3,122 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seatmate</title>
-<style>
-  :root {
-    --bg: #E8EAF0;
-    --surface: #F0F2F8;
-    --shadow-dark: #C5C7CC;
-    --shadow-light: #FFFFFF;
-    --text: #2E3040;
-    --text-muted: #585A68;
-    --primary: #6366F1;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg);
-    color: var(--text-muted);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  .card {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 40px 44px;
-    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-  }
-  h1 { color: var(--text); font-size: 1.6rem; margin: 0 0 6px; }
-  h1 span { color: var(--primary); }
-  p { margin: 0 0 24px; line-height: 1.6; }
-  .links { display: flex; flex-direction: column; gap: 12px; }
-  a.link {
-    display: block;
-    padding: 12px 18px;
-    border-radius: 12px;
-    background: var(--bg);
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-  a.link:hover { color: var(--primary); }
-  a.download {
-    background: var(--primary);
-    color: #fff;
-  }
-  a.download:hover { color: #fff; opacity: 0.92; }
-  .download-note {
-    margin: -4px 0 8px;
-    font-size: 0.72rem;
-    line-height: 1.5;
-    color: var(--text-muted);
-  }
-  .download-note strong { color: var(--text); font-weight: 600; }
-  /* Shown only when we think we're inside another app's browser. */
-  .inapp-warn {
-    display: none;
-    margin: -4px 0 8px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: var(--bg);
-    font-size: 0.72rem;
-    line-height: 1.5;
-    color: var(--text);
-    text-align: left;
-  }
-  .inapp-warn.show { display: block; }
-  footer {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--bg);
-    font-size: 0.72rem;
-    line-height: 1.55;
-    color: var(--text);
-    opacity: 0.65;
-    text-align: left;
-  }
-  footer strong { font-weight: 600; }
-</style>
+<title>Seatmate | Ride sharing between Islamabad and Rawalpindi</title>
+<meta name="description" content="Seatmate connects people driving between Islamabad and Rawalpindi with people heading the same way. Find a ride, offer a ride, pay the driver directly in cash. Android app.">
+<meta name="theme-color" content="#FAF6EC">
+<link rel="canonical" href="https://seatmate.com.pk/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F6B4E'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' text-anchor='middle' fill='%23FAF6EC'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Seatmate">
+<meta property="og:url" content="https://seatmate.com.pk/">
+<meta property="og:locale" content="en_PK">
+<meta property="og:title" content="Seatmate | Ride sharing between Islamabad and Rawalpindi">
+<meta property="og:description" content="Find a ride, offer a ride, pay the driver directly in cash. Android app for the twin cities.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Seatmate | Ride sharing between Islamabad and Rawalpindi">
+<meta name="twitter:description" content="Find a ride, offer a ride, pay the driver directly in cash. Android app for the twin cities.">
 </head>
 <body>
-  <div class="card">
-    <h1>Seat<span>mate</span></h1>
-    <p>Ride sharing in Islamabad &amp; Rawalpindi.</p>
-    <div class="links">
-      <a class="link download" id="download-link"
-         href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
-        Download for Android
-      </a>
-      <p class="inapp-warn" id="inapp-warn">
-        You're browsing inside another app. Downloads often stall here —
-        <strong>open this page in Chrome</strong> before downloading.
-      </p>
-      <p class="download-note">
-        Android only. You may need to allow "install unknown apps" when prompted.<br>
-        <strong>If the download looks stuck near the end and still says
-        "downloading", it has actually finished.</strong> Open
-        <strong>Chrome &rsaquo; Downloads</strong> (or pull down your
-        notifications) and tap the file to install it.
-      </p>
-      <a class="link" href="privacy-policy.html">Privacy Policy</a>
-      <a class="link" href="terms-of-service.html">Terms of Service</a>
-      <a class="link" href="data-deletion.html">Data Deletion</a>
-    </div>
-    <footer>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap wide">
+  <header class="site">
+    <a class="logo" href="/">Seat<span>mate</span></a>
+    <nav class="legal-nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#riders-drivers">Riders and drivers</a>
+      <a href="#trust">Safety</a>
+      <a href="#download">Download</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">Islamabad &amp; Rawalpindi</p>
+      <h1>Share the ride between the twin cities.</h1>
+      <p class="lead">Seatmate connects people who drive between Islamabad and Rawalpindi with people heading the same way. Find a ride, offer a ride, and pay the driver directly.</p>
+      <div class="cta links" id="download">
+        <a class="link download" id="download-link"
+           href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
+          Download for Android
+        </a>
+        <p class="inapp-warn" id="inapp-warn">
+          You're browsing inside another app. Downloads often stall here —
+          <strong>open this page in Chrome</strong> before downloading.
+        </p>
+        <p class="download-note">
+          Android only. You may need to allow "install unknown apps" when prompted.<br>
+          <strong>If the download looks stuck near the end and still says
+          "downloading", it has actually finished.</strong> Open
+          <strong>Chrome &rsaquo; Downloads</strong> (or pull down your
+          notifications) and tap the file to install it.
+        </p>
+      </div>
+    </section>
+
+    <section class="band" id="how" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <div class="grid">
+        <div class="tile"><span class="step-n">01</span><h3>Sign in with your phone</h3><p>Every account is tied to a phone number, confirmed with a one-time code.</p></div>
+        <div class="tile"><span class="step-n">02</span><h3>Find or offer a ride</h3><p>Drivers post a route, a time and the seats they have. Riders search and request a seat.</p></div>
+        <div class="tile"><span class="step-n">03</span><h3>Ride with a boarding code</h3><p>When the driver accepts, the rider gets a boarding code. The driver enters it to start the ride, and the fare is paid directly in cash.</p></div>
+      </div>
+    </section>
+
+    <section class="band" id="riders-drivers" aria-labelledby="rd-h">
+      <h2 id="rd-h">For riders and for drivers</h2>
+      <div class="grid">
+        <div class="tile"><h3>Riders</h3><p>Search by area and time, see the driver, the car and the fare before you ask for a seat, and message the driver about the pickup.</p></div>
+        <div class="tile"><h3>Drivers</h3><p>Post the trip you are already making, including a regular weekly commute, choose how many seats to offer and accept the requests you want.</p></div>
+        <div class="tile"><h3>One account</h3><p>The same account can find rides on one day and offer them on another.</p></div>
+      </div>
+    </section>
+
+    <section class="band" id="trust" aria-labelledby="trust-h">
+      <h2 id="trust-h">Safety and trust</h2>
+      <div class="grid">
+        <div class="tile"><h3>Verified phone numbers</h3><p>Sign-in needs a one-time code sent to your number, so each seat has a real person behind it.</p></div>
+        <div class="tile"><h3>Women-only rides</h3><p>Women drivers can offer rides that only women can request.</p></div>
+        <div class="tile"><h3>Report a problem</h3><p>You can report a ride or a person from inside the app, and write to us at any time.</p></div>
+      </div>
+      <p class="note" style="margin-top:18px">Seatmate is a pilot service for Islamabad and Rawalpindi. Fares are shown in the app and paid in cash directly to the driver. Please read the <a href="terms-of-service.html">Terms of Service</a> and the <a href="privacy-policy.html">Privacy Policy</a> before you use the app.</p>
+    </section>
+
+    <section class="band" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <dl class="contact">
+        <dt>Help with the app, a ride or your account</dt>
+        <dd><a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a></dd>
+        <dt>Privacy questions and data deletion</dt>
+        <dd><a href="mailto:privacy@seatmate.com.pk">privacy@seatmate.com.pk</a> &middot; <a href="data-deletion.html">How to delete your data</a></dd>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="company">
+    <p><a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms-of-service.html">Terms of Service</a> &middot; <a href="data-deletion.html">Data Deletion</a></p>
+    <p>
       Seatmate is a service of <strong>ALMISHQUN (SMC-PRIVATE) LIMITED</strong>,
       a company incorporated in Pakistan under the Companies Act, 2017.<br>
       SECP Corporate Universal Identification No. 0350299<br>
-      House 1027, Street 77, D-12/1, Islamabad, Pakistan
-    </footer>
-  </div>
-  <script>
+      House 1027, Street 77, D-12/1, Islamabad, Pakistan<br>
+      <a href="https://almishqun.com">almishqun.com</a>
+    </p>
+  </footer>
+</div>
+<script>
     // Android in-app browsers (the stripped-down Chrome you get when you tap a
     // link inside WhatsApp, Instagram, Facebook, …) are a Chrome Custom Tab or
     // a raw WebView. They can download a file but routinely fail to hand the
@@ -156,7 +145,7 @@
         ';end';
     }
   </script>
-  <script>
+<script>
     // The button's href above is a safe fallback (GitHub's own "latest
     // release" redirect) in case this fails. When it works, point it at the
     // exact asset from latest.json instead — the same file the app itself
