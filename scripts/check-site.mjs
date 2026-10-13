@@ -43,6 +43,7 @@ for (const f of pages) {
   }
 }
 
+const idx0 = () => read('index.html');
 // sitemap and robots
 const sm = read('sitemap.xml');
 const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).sort();
@@ -56,6 +57,8 @@ check('latest.json has versionCode, versionName and an https apkUrl', Number.isI
 const al = JSON.parse(read('.well-known/assetlinks.json'));
 check('assetlinks.json names pk.seatmate.app with a SHA-256 fingerprint', al[0]?.target?.package_name === 'pk.seatmate.app' && /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(al[0]?.target?.sha256_cert_fingerprints?.[0] ?? ''));
 check('CNAME is seatmate.com.pk', read('CNAME').trim() === 'seatmate.com.pk');
+
+check('share preview image is declared and the file exists (square, PNG, under 1 MB)', idx0().includes('og:image" content="' + ORIGIN + 'og-image.png') && fs.existsSync(path.join(root, 'og-image.png')) && fs.statSync(path.join(root, 'og-image.png')).size < 1e6);
 
 // download logic and contact consistency
 const idx = read('index.html');
