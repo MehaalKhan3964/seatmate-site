@@ -17,7 +17,7 @@ const ORIGIN = 'https://seatmate.com.pk/';
 
 for (const f of pages) {
   const s = read(f);
-  check(`${f}: html lang`, /<html lang="en">/.test(s));
+  check(`${f}: html lang`, /<html lang="en"[^>]*>/.test(s));
   check(`${f}: title`, /<title>[^<]{3,}<\/title>/.test(s));
   check(`${f}: viewport`, /<meta name="viewport" content="width=device-width, initial-scale=1.0">/.test(s));
   check(`${f}: description 50 to 200 characters`, (() => { const m = /<meta name="description" content="([^"]*)"/.exec(s); return !!m && m[1].length >= 50 && m[1].length <= 200; })());
@@ -68,7 +68,13 @@ const mails = (f) => [...new Set([...read(f).matchAll(/mailto:([^"]+)"/g)].map((
 check('support@ and privacy@ are the only contact addresses, on the landing page', JSON.stringify(mails('index.html').sort()) === JSON.stringify(['privacy@seatmate.com.pk', 'support@seatmate.com.pk']), mails('index.html').join(','));
 check('the policy pages use the same two addresses', ['privacy-policy.html', 'terms-of-service.html', 'data-deletion.html'].every((f) => mails(f).every((m) => ['privacy@seatmate.com.pk', 'support@seatmate.com.pk'].includes(m))));
 check('company details present in the landing footer', ['ALMISHQUN (SMC-PRIVATE) LIMITED', '0350299', 'D-12/1'].every((t) => idx.includes(t)));
-check('every landing-page claim stays within the pilot position: no "verified driver", no fee promise, no SOS claim', !/verified driver|no fees|free of charge|sos|emergency/i.test(idx));
+check('landing-page claims stay accurate: no "verified driver", no fee promise, no SOS claim', !/verified driver|no fees|free of charge|sos/i.test(idx));
+// positioning (owner, 2026-10-14): Seatmate is a carpooling platform for Pakistan; no page presents it as limited to two cities. The company's registered address is company identity, not positioning.
+for (const f of pages) { const txt = read(f).replace(/House 1027, Street 77, D-12\/1, Islamabad, Pakistan/g, ''); check(`${f}: no city-exclusive positioning`, !/islamabad|rawalpindi|twin cit/i.test(txt)); }
+check('every image and font referenced by the landing page exists', [...idx.matchAll(/(?:src|href)="(\/(?:img|fonts)\/[^"]+)"/g)].every((m) => fs.existsSync(path.join(root, m[1].slice(1)))));
+check('landing page carries every required section', ['id="passengers"', 'id="drivers"', 'id="features"', 'id="fares"', 'id="safety"', 'id="faq"', 'id="download"'].every((t) => idx.includes(t)));
+check('the next-update features are labelled as not yet in the current download', (idx.match(/badge-next/g) || []).length >= 6 && /not in the current Android download yet/.test(idx));
+check('no price, rating or user-count claims on the landing page', !/\d[\d,.]*\s*(\+|k)?\s*(users|riders|drivers|rides|downloads)/i.test(idx.replace(/<script[\s\S]*?<\/script>/g, '')));
 
 console.log(failed === 0 ? '\nsite checks: all passed' : `\nsite checks: ${failed} FAILED`);
 process.exit(failed === 0 ? 0 : 1);

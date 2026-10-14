@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
 <!-- HTTP to HTTPS fallback: the server-side redirect is a Cloudflare/Pages setting; this covers the gap -->
 <script>if(location.protocol==="http:"&&location.hostname==="seatmate.com.pk"){location.replace("https://"+location.host+location.pathname+location.search+location.hash)}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seatmate | Ride sharing between Islamabad and Rawalpindi</title>
-<meta name="description" content="Seatmate connects people driving between Islamabad and Rawalpindi with people heading the same way. Find a ride, offer a ride, pay the driver directly in cash. Android app.">
-<meta name="theme-color" content="#FAF6EC">
+<title>Seatmate | Carpooling app for Pakistan: find or offer a ride</title>
+<meta name="description" content="Seatmate is a carpooling app built in Pakistan. Find a seat or offer one in your car or on your motorbike, see the fare up front and pay the driver directly in cash. Android app.">
+<meta name="theme-color" content="#06080f">
 <link rel="canonical" href="https://seatmate.com.pk/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F6B4E'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' text-anchor='middle' fill='%23FAF6EC'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="preload" href="/fonts/GoogleSans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Seatmate">
@@ -19,101 +21,338 @@
 <meta property="og:image:height" content="1024">
 <meta property="og:image:alt" content="Seatmate app icon">
 <meta property="og:locale" content="en_PK">
-<meta property="og:title" content="Seatmate | Ride sharing between Islamabad and Rawalpindi">
-<meta property="og:description" content="Find a ride, offer a ride, pay the driver directly in cash. Android app for the twin cities.">
+<meta property="og:title" content="Seatmate | Carpooling app for Pakistan">
+<meta property="og:description" content="Find a seat or offer one, in a car or on a motorbike. See the fare up front and pay the driver directly in cash. Android app.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://seatmate.com.pk/og-image.png">
-<meta name="twitter:title" content="Seatmate | Ride sharing between Islamabad and Rawalpindi">
-<meta name="twitter:description" content="Find a ride, offer a ride, pay the driver directly in cash. Android app for the twin cities.">
+<meta name="twitter:title" content="Seatmate | Carpooling app for Pakistan">
+<meta name="twitter:description" content="Find a seat or offer one, in a car or on a motorbike. See the fare up front and pay the driver directly in cash. Android app.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"Seatmate","operatingSystem":"Android","applicationCategory":"TravelApplication","description":"Carpooling app for Pakistan: find or offer a ride in a car or on a motorbike and pay the driver directly in cash.","url":"https://seatmate.com.pk/","publisher":{"@type":"Organization","name":"ALMISHQUN (SMC-PRIVATE) LIMITED","url":"https://almishqun.com"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap wide">
-  <header class="site">
-    <a class="logo" href="/">Seat<span>mate</span></a>
-    <nav class="legal-nav" aria-label="Main">
-      <a href="#how">How it works</a>
-      <a href="#riders-drivers">Riders and drivers</a>
-      <a href="#trust">Safety</a>
-      <a href="#download">Download</a>
-      <a href="#contact">Contact</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path d="M6.5 9.5h11v7.2a1.3 1.3 0 0 1-1.3 1.3h-.9v2.2a1.1 1.1 0 0 1-2.2 0V18h-2.2v2.2a1.1 1.1 0 0 1-2.2 0V18h-.9a1.3 1.3 0 0 1-1.3-1.3V9.5zM4.6 9.7a1.1 1.1 0 0 1 2.2 0v5.2a1.1 1.1 0 0 1-2.2 0V9.7zm12.6 0a1.1 1.1 0 0 1 2.2 0v5.2a1.1 1.1 0 0 1-2.2 0V9.7zM7 8.6a5 5 0 0 1 10 0H7zm2.4-3.6l-1.2-1.7m7.4 1.7l1.2-1.7" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><circle cx="9.7" cy="6.9" r=".7" fill="#04150d"/><circle cx="14.3" cy="6.9" r=".7" fill="#04150d"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 15.5V12l1.7-4.2A2 2 0 0 1 8.6 6.5h6.8a2 2 0 0 1 1.9 1.3L19 12v3.5M5 15.5h14M5 15.5v2.2a.8.8 0 0 0 .8.8h1.4a.8.8 0 0 0 .8-.8v-1.2M19 15.5v2.2a.8.8 0 0 1-.8.8h-1.4a.8.8 0 0 1-.8-.8v-1.2M5.5 12h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.3" cy="13.7" r=".9" fill="currentColor"/><circle cx="15.7" cy="13.7" r=".9" fill="currentColor"/></symbol>
+    <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="18" cy="16.5" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 16.5l3.5-6h4.2l2.3 6M12 16.5l-1.6-6M13.7 10.5l1.2-3h2.2M8.5 7.5h2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2l7 2.7v5.5c0 4.4-2.9 8-7 9.4-4.1-1.4-7-5-7-9.4V5.9l7-2.7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-women" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 12.2V20M9 17h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h11l-2.5-2.5M20 13v2a3 3 0 0 1-3 3H6l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 6.5A2.5 2.5 0 0 1 7 4h10a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 17 16h-5.5L7.6 19.6a.5.5 0 0 1-.85-.36V16H7a2.5 2.5 0 0 1-2.5-2.5v-7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 4l2.5 5.2 5.6.8-4.1 4 1 5.6L12 16.9 7 19.6l1-5.6-4.1-4 5.6-.8L12 4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.8 12h16.4M12 3.8c2.6 2.4 3.6 5.2 3.6 8.2s-1 5.8-3.6 8.2c-2.6-2.4-3.6-5.2-3.6-8.2s1-5.8 3.6-8.2z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="2.3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="17.5" r="2.3" fill="currentColor"/><path d="M8.8 6.5h5.2a3 3 0 0 1 0 6h-4a3 3 0 0 0 0 6h5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 10h1m3 0h1m3 0h1M8 14h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="3.5" y="6.5" width="17" height="11" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.5 9.5v.01M17.5 14.5v.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3.2" width="10" height="17.6" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11 17.6h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 20.5V4.5M6 5h10.5l-1.8 3.6L16.5 12H6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 20.5s6-5.2 6-10.3a6 6 0 0 0-12 0c0 5.1 6 10.3 6 10.3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.2" fill="currentColor"/></symbol>
+    <symbol id="i-offer" viewBox="0 0 24 24"><path d="M4 12h12m0 0l-3.5-3.5M16 12l-3.5 3.5M20 6v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-block" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.2 6.2l11.6 11.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.6M12 16.7v.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="top">
+  <div class="nav-in">
+    <a class="brand" href="/" aria-label="Seatmate home"><img src="/logo-mark.png" alt="" width="40" height="27"><span class="wm"><b>Seat</b>mate</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#passengers">Passengers</a>
+      <a href="#drivers">Drivers</a>
+      <a href="#features">Features</a>
+      <a href="#fares">Fares</a>
+      <a href="#safety">Safety</a>
+      <a href="#faq">FAQ</a>
+      <a class="pill js-dl" href="#download">Download</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="main">
-    <section class="hero">
-      <p class="eyebrow">Islamabad &amp; Rawalpindi</p>
-      <h1>Share the ride between the twin cities.</h1>
-      <p class="lead">Seatmate connects people who drive between Islamabad and Rawalpindi with people heading the same way. Find a ride, offer a ride, and pay the driver directly.</p>
-      <div class="cta links" id="download">
-        <a class="link download" id="download-link"
-           href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
-          Download for Android
-        </a>
-        <p class="inapp-warn" id="inapp-warn">
-          You're browsing inside another app. Downloads often stall here —
-          <strong>open this page in Chrome</strong> before downloading.
-        </p>
-        <p class="download-note">
-          Android only. You may need to allow "install unknown apps" when prompted.<br>
-          <strong>If the download looks stuck near the end and still says
-          "downloading", it has actually finished.</strong> Open
-          <strong>Chrome &rsaquo; Downloads</strong> (or pull down your
-          notifications) and tap the file to install it.
-        </p>
+<main id="main">
+
+  <!-- ═════════════ HERO ═════════════ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-card">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="orbit" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="chip"><i></i>Carpooling for Pakistan</span>
+          <h1 id="hero-title">Share the ride. <em>Share the road.</em></h1>
+          <p class="sub">Seatmate is a carpooling app built in Pakistan. Drivers post the trips they are already making, riders find a seat that fits their route, and the fare is paid directly to the driver in cash.</p>
+          <div class="cta-row">
+            <a class="btn" id="download-link" href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
+              <svg aria-hidden="true"><use href="#i-android"/></svg><span class="dl-label">Download for Android</span>
+            </a>
+            <a class="btn secondary" href="#passengers">See how it works</a>
+          </div>
+          <p class="inapp-warn" id="inapp-warn">You're browsing inside another app. Downloads often stall here, so <a href="#download">open this page in Chrome</a> before downloading.</p>
+          <ul class="hero-tags" aria-label="Highlights">
+            <li>Android app</li><li>Car pool</li><li>Motorbike pool</li><li>Cash to the driver</li>
+          </ul>
+        </div>
+        <div class="hero-phones" aria-hidden="false">
+          <div class="phone p1 glow-b"><div class="screen"><img src="/img/search.webp" width="600" height="1217" alt="Seatmate trip results showing best-match rides with fares and seats left"></div></div>
+          <div class="phone p2"><div class="screen"><img src="/img/ticket.webp" width="600" height="1217" alt="Seatmate boarding code screen: seat confirmed with the route, departure time, seats and fare"></div></div>
+          <div class="phone p3 glow-b"><div class="screen"><img src="/img/manage.webp" width="600" height="1217" alt="Seatmate driver screen with a passenger request waiting to be accepted or rejected"></div></div>
+        </div>
       </div>
-    </section>
-
-    <section class="band" id="how" aria-labelledby="how-h">
-      <h2 id="how-h">How it works</h2>
-      <div class="grid">
-        <div class="tile"><span class="step-n">01</span><h3>Sign in with your phone</h3><p>Every account is tied to a phone number, confirmed with a one-time code.</p></div>
-        <div class="tile"><span class="step-n">02</span><h3>Find or offer a ride</h3><p>Drivers post a route, a time and the seats they have. Riders search and request a seat.</p></div>
-        <div class="tile"><span class="step-n">03</span><h3>Ride with a boarding code</h3><p>When the driver accepts, the rider gets a boarding code. The driver enters it to start the ride, and the fare is paid directly in cash.</p></div>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Carpooling for Pakistan</span><span>Car pool</span><span>Motorbike pool</span><span>Women-only rides</span><span>Boarding codes</span><span>Cash straight to the driver</span><span>English and Urdu</span><span>Built in Pakistan</span>
+        <span>Carpooling for Pakistan</span><span>Car pool</span><span>Motorbike pool</span><span>Women-only rides</span><span>Boarding codes</span><span>Cash straight to the driver</span><span>English and Urdu</span><span>Built in Pakistan</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="band" id="riders-drivers" aria-labelledby="rd-h">
-      <h2 id="rd-h">For riders and for drivers</h2>
-      <div class="grid">
-        <div class="tile"><h3>Riders</h3><p>Search by area and time, see the driver, the car and the fare before you ask for a seat, and message the driver about the pickup.</p></div>
-        <div class="tile"><h3>Drivers</h3><p>Post the trip you are already making, including a regular weekly commute, choose how many seats to offer and accept the requests you want.</p></div>
-        <div class="tile"><h3>One account</h3><p>The same account can find rides on one day and offer them on another.</p></div>
+  <!-- ═════════════ PASSENGERS ═════════════ -->
+  <section class="section story" id="passengers" aria-labelledby="pax-title">
+    <div class="container gallery-head">
+      <div class="reveal">
+        <div class="label"><b>01</b> For passengers</div>
+        <h2 class="h2" id="pax-title">Find a seat in a few taps.</h2>
+        <p class="lead-2">Search your route, compare the rides that match, check the fare and the vehicle, then ask for a seat. Everything you need before you commit is on one screen.</p>
       </div>
-    </section>
+      <div class="gnav" data-gallery="gal-pax"><button type="button" data-dir="prev" aria-label="Previous screens">&larr;</button><button type="button" data-dir="next" aria-label="Next screens">&rarr;</button></div>
+    </div>
+    <div class="gallery" id="gal-pax" tabindex="0" aria-label="Passenger screens">
+      <figure class="shot reveal"><div class="phone"><div class="screen"><img loading="lazy" src="/img/search.webp" width="600" height="1217" alt="Trip results with best match, cheapest and earliest sorting"></div></div>
+        <figcaption><b>01 / Search</b><strong>Rides that fit your route</strong><span>Search by area and time and see the best matches first, with the fare and the seats left.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.08s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/ride.webp" width="600" height="1217" alt="Ride details with departure time, fare per seat, seats available and the driver's vehicle"></div></div>
+        <figcaption><b>02 / Compare</b><strong>See it all before you ask</strong><span>Departure and arrival times, fare per seat, seats available, the driver and the vehicle.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.16s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/requested.webp" width="600" height="1217" alt="Request sent: waiting for the driver to accept your seat"></div></div>
+        <figcaption><b>03 / Request</b><strong>Ask for your seat</strong><span>Your request goes straight to the driver and the page updates by itself when they answer.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.24s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/chat.webp" width="600" height="1217" alt="Chat between a passenger and a driver arranging a pickup, with quick replies"></div></div>
+        <figcaption><b>04 / Talk</b><strong>Sort out the pickup</strong><span>Message the driver in the app, with quick replies like "On my way".</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.32s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/ticket.webp" width="600" height="1217" alt="Seat confirmed with a four-digit boarding code"></div></div>
+        <figcaption><b>05 / Board</b><strong>Show your boarding code</strong><span>When the driver accepts, you get a code to show as you get in. It confirms you are in the right car.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.4s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/myrides.webp" width="600" height="1217" alt="My Rides listing a posted ride and booked rides with their status"></div></div>
+        <figcaption><b>06 / Track</b><strong>Your trips in one place</strong><span>Upcoming and past rides, their status and a reminder that the fare is paid directly to the driver in cash.</span></figcaption></figure>
+    </div>
+  </section>
 
-    <section class="band" id="trust" aria-labelledby="trust-h">
-      <h2 id="trust-h">Safety and trust</h2>
-      <div class="grid">
-        <div class="tile"><h3>Verified phone numbers</h3><p>Sign-in needs a one-time code sent to your number, so each seat has a real person behind it.</p></div>
-        <div class="tile"><h3>Women-only rides</h3><p>Women drivers can offer rides that only women can request.</p></div>
-        <div class="tile"><h3>Report a problem</h3><p>You can report a ride or a person from inside the app, and write to us at any time.</p></div>
+  <!-- ═════════════ DRIVERS ═════════════ -->
+  <section class="section story alt" id="drivers" aria-labelledby="drv-title">
+    <div class="container gallery-head">
+      <div class="reveal">
+        <div class="label"><b>02</b> For drivers</div>
+        <h2 class="h2" id="drv-title">Fill the empty seats.</h2>
+        <p class="lead-2">Post the trip you are already making, in a car or on a motorbike. Choose the seats and the fare, accept the requests you want and start the ride with the passenger's code.</p>
       </div>
-      <p class="note" style="margin-top:18px">Seatmate is a pilot service for Islamabad and Rawalpindi. Fares are shown in the app and paid in cash directly to the driver. Please read the <a href="terms-of-service.html">Terms of Service</a> and the <a href="privacy-policy.html">Privacy Policy</a> before you use the app.</p>
-    </section>
+      <div class="gnav" data-gallery="gal-drv"><button type="button" data-dir="prev" aria-label="Previous screens">&larr;</button><button type="button" data-dir="next" aria-label="Next screens">&rarr;</button></div>
+    </div>
+    <div class="gallery" id="gal-drv" tabindex="0" aria-label="Driver screens">
+      <figure class="shot reveal"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/post-car.webp" width="600" height="1217" alt="Offer a Ride form for a car: seats offered, fare per seat, women-only and recurring options"></div></div>
+        <figcaption><b>01 / Post a car ride</b><strong>The trip you're already making</strong><span>Pick the pickup and drop-off, the date and time, how many seats you offer and the fare per seat.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.08s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/post-bike.webp" width="600" height="1217" alt="Offer a Ride form for a motorbike: one pillion seat"></div></div>
+        <figcaption><b>02 / Post a bike ride</b><strong>On a motorbike? Offer your pillion seat</strong><span>A bike carries one passenger, so the app sets the seat for you. Same app, same flow.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.16s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/manage.webp" width="600" height="1217" alt="Manage ride: a request waiting with Accept and Reject buttons, plus Start ride"></div></div>
+        <figcaption><b>03 / Handle requests</b><strong>Accept the ones you want</strong><span>See who is asking and how far they add to your route, then accept or reject.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.24s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/chat.webp" width="600" height="1217" alt="Driver and passenger chat about the pickup point"></div></div>
+        <figcaption><b>04 / Coordinate</b><strong>Agree the pickup point</strong><span>One thread per ride, so the details stay together.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.32s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/profile.webp" width="600" height="1217" alt="Driver profile showing the vehicle, ride history and usual route"></div></div>
+        <figcaption><b>05 / Your profile</b><strong>Riders see who they're riding with</strong><span>Your name, vehicle and ride history, so passengers know who to look for.</span></figcaption></figure>
+    </div>
+  </section>
 
-    <section class="band" id="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">Contact</h2>
-      <dl class="contact">
-        <dt>Help with the app, a ride or your account</dt>
-        <dd><a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a></dd>
-        <dt>Privacy questions and data deletion</dt>
-        <dd><a href="mailto:privacy@seatmate.com.pk">privacy@seatmate.com.pk</a> &middot; <a href="data-deletion.html">How to delete your data</a></dd>
-      </dl>
-    </section>
-  </main>
+  <!-- ═════════════ BENEFITS ═════════════ -->
+  <section class="section" aria-labelledby="ben-title">
+    <div class="container">
+      <div class="reveal">
+        <div class="label"><b>03</b> Why Seatmate</div>
+        <h2 class="h2 wide" id="ben-title">One account. Two ways to travel.</h2>
+      </div>
+      <div class="split">
+        <article class="panel reveal">
+          <span class="role">Passengers</span>
+          <h3>Know before you go.</h3>
+          <ul class="ticks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>The fare, up front</strong>See the price per seat before you ask for one.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Rides that match your route</strong>Results are ranked by how closely they fit where you are going.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>A real person behind each seat</strong>Sign-in uses a one-time code, and you can read the driver's profile first.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Women-only rides</strong>Filter for rides that only women can request.</div></li>
+          </ul>
+        </article>
+        <article class="panel b reveal" style="--d:.1s">
+          <span class="role">Drivers</span>
+          <h3>Make the trip count.</h3>
+          <ul class="ticks">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>You set the fare and the seats</strong>Your trip, your price, your number of seats.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>You choose who rides</strong>Accept or reject every request.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Regular commute? Post it once</strong>Repeat a ride on the days you drive it.</div></li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><strong>Cars and motorbikes</strong>Both are supported, each with the right number of seats.</div></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <footer class="company">
-    <p><a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="terms-of-service.html">Terms of Service</a> &middot; <a href="data-deletion.html">Data Deletion</a></p>
-    <p>
-      Seatmate is a service of <strong>ALMISHQUN (SMC-PRIVATE) LIMITED</strong>,
-      a company incorporated in Pakistan under the Companies Act, 2017.<br>
-      SECP Corporate Universal Identification No. 0350299<br>
-      House 1027, Street 77, D-12/1, Islamabad, Pakistan<br>
-      <a href="https://almishqun.com">almishqun.com</a>
-    </p>
-  </footer>
-</div>
+  <!-- ═════════════ FEATURES ═════════════ -->
+  <section class="section" id="features" aria-labelledby="feat-title" style="padding-top:0">
+    <div class="container">
+      <div class="reveal">
+        <div class="label"><b>04</b> What's in the app</div>
+        <h2 class="h2 wide" id="feat-title">Built for how Pakistan commutes.</h2>
+        <p class="lead-2">The features below are in the Android app you can download today. What is coming next is shown separately further down.</p>
+      </div>
+      <div class="bento">
+        <article class="cell w6 reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-car"/></svg></span><h3>Car pool and motorbike pool</h3><p>Post and find rides on four wheels or two. A bike ride offers one pillion seat; a car ride offers the seats you choose.</p>
+          <div class="mini"><div class="phone"><div class="screen"><img loading="lazy" src="/img/post-car.webp" width="600" height="1217" alt=""></div></div><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/post-bike.webp" width="600" height="1217" alt=""></div></div></div></article>
+        <article class="cell w6 reveal" style="--d:.08s"><span class="ico b"><svg aria-hidden="true"><use href="#i-route"/></svg></span><h3>Smart route matching</h3><p>Results are scored by how well a ride fits your pickup and drop-off, and each one shows the arrival time.</p>
+          <div class="mini"><div class="phone"><div class="screen"><img loading="lazy" src="/img/search.webp" width="600" height="1217" alt=""></div></div><div class="phone glow-b"><div class="screen tall"><img loading="lazy" src="/img/explore.webp" width="600" height="1079" alt=""></div></div></div></article>
+        <article class="cell reveal"><span class="ico w"><svg aria-hidden="true"><use href="#i-women"/></svg></span><h3>Women-only rides</h3><p>Women drivers can offer rides that only women can request, and riders can filter for them.</p></article>
+        <article class="cell reveal" style="--d:.08s"><span class="ico"><svg aria-hidden="true"><use href="#i-repeat"/></svg></span><h3>Recurring commutes</h3><p>Drive the same route every week? Turn on a recurring ride instead of posting it again each day.</p></article>
+        <article class="cell reveal" style="--d:.16s"><span class="ico b"><svg aria-hidden="true"><use href="#i-key"/></svg></span><h3>Boarding codes</h3><p>Passengers get a code when a seat is confirmed. The driver enters it to start the ride.</p></article>
+        <article class="cell reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><h3>Chat in the app</h3><p>Message the driver or passenger about the pickup, with quick replies. Everyone on a ride can also join its group chat.</p></article>
+        <article class="cell reveal" style="--d:.08s"><span class="ico b"><svg aria-hidden="true"><use href="#i-star"/></svg></span><h3>Profiles and ratings</h3><p>See a driver's vehicle, ride history and rating before you ask for a seat, and rate the ride afterwards.</p></article>
+        <article class="cell reveal" style="--d:.16s"><span class="ico w"><svg aria-hidden="true"><use href="#i-globe"/></svg></span><h3>English and Urdu</h3><p>Use the app in the language you are comfortable with, including right-to-left Urdu layouts.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ FARES ═════════════ -->
+  <section class="section fare" id="fares" aria-labelledby="fare-title">
+    <div class="container">
+      <div class="reveal">
+        <div class="label"><b>05</b> Fares and arrangements</div>
+        <h2 class="h2 wide" id="fare-title">See the fare before you ask.</h2>
+      </div>
+      <div class="fare-grid">
+        <div>
+          <ol class="steps">
+            <li class="reveal"><div><strong>The driver sets a fare per seat</strong>It is shown on the ride, so you can compare before you decide.</div></li>
+            <li class="reveal"><div><strong>You request a seat</strong>The app confirms the fare in a short dialog before the request goes out.</div></li>
+            <li class="reveal"><div><strong>You and the driver arrange the pickup</strong>Use the in-app chat to agree where to meet.</div></li>
+            <li class="reveal"><div><strong>Pay the driver directly, in cash</strong>Seatmate does not take payment in the app. Pay the driver during the ride.</div></li>
+          </ol>
+          <div class="note-box reveal"><strong>Coming in the next update:</strong> if the listed fare doesn't suit you, make a counter-offer. Up to three offers per request, 60 minutes to answer, cars only, and the agreed fare becomes the fare for that booking.</div>
+        </div>
+        <div class="fare-phones reveal">
+          <div class="phone"><div class="screen"><img loading="lazy" src="/img/fare-rider.webp" width="600" height="1217" alt="Passenger side of fare negotiation: Offer a different fare, with the listed fare shown"></div></div>
+          <div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/fare-driver.webp" width="600" height="1217" alt="Driver side of fare negotiation: Accept the offered fare, Counter-offer or Decline"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ NEXT UPDATE ═════════════ -->
+  <section class="section story alt next" id="next" aria-labelledby="next-title" style="padding-bottom:40px">
+    <div class="container gallery-head">
+      <div class="reveal">
+        <div class="label"><b>06</b> Next update</div>
+        <h2 class="h2 wide" id="next-title">What we're shipping next.</h2>
+        <p class="lead-2">These are built and being rolled out. They are not in the current Android download yet, so you may not see them until the next app update.</p>
+      </div>
+      <div class="gnav" data-gallery="gal-next"><button type="button" data-dir="prev" aria-label="Previous screens">&larr;</button><button type="button" data-dir="next" aria-label="Next screens">&rarr;</button></div>
+    </div>
+    <div class="gallery" id="gal-next" tabindex="0" aria-label="Upcoming features">
+      <figure class="shot reveal"><div class="phone"><div class="screen"><img loading="lazy" src="/img/request-ride.webp" width="600" height="1217" alt="Request a ride form: choose where from and to, when, and how many seats"></div></div>
+        <figcaption><span class="badge-next">Next update</span><strong>Post a ride request</strong><span>No ride at your time? Tell drivers where and when you need to go, and get notified when a matching ride is posted.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.08s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/fare-driver.webp" width="600" height="1217" alt="Fare negotiation from the driver's side"></div></div>
+        <figcaption><span class="badge-next">Next update</span><strong>Fare negotiation</strong><span>Offer a different fare, counter-offer and agree a price in the app. Up to three offers per request, 60 minutes to answer, cars only.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.16s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/vehicles.webp" width="600" height="1217" alt="My vehicles: the car and motorbike on your account, checked by Support"></div></div>
+        <figcaption><span class="badge-next">Next update</span><strong>Your vehicles, checked</strong><span>Register your car or motorbike. Support checks it, and your rides use it so you never retype it.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.24s"><div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/support.webp" width="600" height="1217" alt="Help and Support: report a problem, ride or booking issue, dispute, technical issue, safety"></div></div>
+        <figcaption><span class="badge-next">Next update</span><strong>Help &amp; support in the app</strong><span>Report a problem, a ride issue or a dispute, and follow the replies from inside the app.</span></figcaption></figure>
+      <figure class="shot reveal" style="--d:.32s"><div class="phone"><div class="screen"><img loading="lazy" src="/img/blocked.webp" width="600" height="1217" alt="Blocked people: people you block cannot request your rides or message you"></div></div>
+        <figcaption><span class="badge-next">Next update</span><strong>Block people</strong><span>People you block can't request your rides or message you, and they are not told.</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ═════════════ SAFETY ═════════════ -->
+  <section class="section" id="safety" aria-labelledby="safety-title">
+    <div class="container">
+      <div class="reveal">
+        <div class="label"><b>07</b> Safety and trust</div>
+        <h2 class="h2 wide" id="safety-title">Tools that help you travel with care.</h2>
+        <p class="lead-2">Seatmate gives you ways to know who you are riding with and to reach someone if you need to. It is a set of tools, not a guarantee: use your own judgement on every ride.</p>
+      </div>
+      <div class="safety-grid">
+        <div class="trust-list">
+          <div class="trust reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><div><h3>Sign-in with a one-time code</h3><p>Every account is confirmed with a code sent to you, so each seat has a person behind it.</p></div></div>
+          <div class="trust reveal" style="--d:.06s"><span class="ico w"><svg aria-hidden="true"><use href="#i-women"/></svg></span><div><h3>Women-only rides</h3><p>Rides that only women can request, offered by women drivers.</p></div></div>
+          <div class="trust reveal" style="--d:.12s"><span class="ico b"><svg aria-hidden="true"><use href="#i-key"/></svg></span><div><h3>Boarding codes</h3><p>The driver starts the ride with your code, which confirms you boarded the right car.</p></div></div>
+          <div class="trust reveal" style="--d:.18s"><span class="ico"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><h3>Emergency contact and a private location link</h3><p>Add someone you trust. During a ride you can let them follow where you are through a private link that expires when the ride ends. It is best-effort: it depends on your phone, battery and signal.</p></div></div>
+          <div class="trust reveal" style="--d:.24s"><span class="ico b"><svg aria-hidden="true"><use href="#i-flag"/></svg></span><div><h3>Report a problem</h3><p>Report a ride or a person from inside the app, or write to <a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a>.</p></div></div>
+          <div class="trust reveal" style="--d:.3s"><span class="ico w"><svg aria-hidden="true"><use href="#i-block"/></svg></span><div><h3>Safety centre and blocking <span class="badge-next" style="margin:0 0 0 8px">Next update</span></h3><p>A safety screen with a one-tap call to the police, the option to block people, and vehicles checked by Support.</p></div></div>
+        </div>
+        <div class="safety-phones reveal">
+          <div class="phone"><div class="screen"><img loading="lazy" src="/img/emergency.webp" width="600" height="1217" alt="Emergency contact screen: choose who to share a private location link with during a ride"></div></div>
+          <div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/safety.webp" width="600" height="1217" alt="Safety screen with a call-the-police button, emergency contact and a report option"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ FAQ ═════════════ -->
+  <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
+    <div class="container faq-wrap">
+      <div class="reveal">
+        <div class="label"><b>08</b> Questions</div>
+        <h2 class="h2" id="faq-title" style="max-width:9ch">Good to know.</h2>
+        <p class="lead-2">Can't find your answer? Write to <a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a>.</p>
+      </div>
+      <div class="faq">
+        <details class="q reveal"><summary>Which cities does Seatmate work in?</summary><div class="a"><p>Seatmate is built for Pakistan. Rides appear wherever drivers post them, so what you find depends on your route and time of day. If nothing matches yet, try nearby areas or a different time, and ask a friend who drives your route to post it.</p></div></details>
+        <details class="q reveal"><summary>How do I pay for a ride?</summary><div class="a"><p>The driver sets a fare per seat and it is shown on the ride before you ask. You pay the driver directly, in cash, during the ride. Seatmate does not take payment in the app.</p></div></details>
+        <details class="q reveal"><summary>How do I get started?</summary><div class="a"><p>Download the Android app and sign in with a one-time code. Then search for a route to find a seat, or tap Offer a Ride to post a trip. The same account does both.</p></div></details>
+        <details class="q reveal"><summary>What is the boarding code?</summary><div class="a"><p>When a driver accepts your request you get a short code. You show it to the driver as you get in, and they enter it to start the ride. It confirms you are in the right car.</p></div></details>
+        <details class="q reveal"><summary>Can I offer a ride on my motorbike?</summary><div class="a"><p>Yes. Choose Bike when you post a ride. A motorbike carries one passenger, so the app offers one seat.</p></div></details>
+        <details class="q reveal"><summary>What are women-only rides?</summary><div class="a"><p>A woman driver can mark a ride as women-only. Only women can request a seat on it, and riders can filter the feed for these rides.</p></div></details>
+        <details class="q reveal"><summary>What if there is no ride on my route?</summary><div class="a"><p>Try nearby pick-up areas or a different time. In the next app update you will also be able to post a ride request, so drivers who pass your route can see that you are looking for one.</p></div></details>
+        <details class="q reveal"><summary>Is my location shared?</summary><div class="a"><p>Your location is used to match rides and to show progress while a ride is active. If you add an emergency contact, you can give that one person a private link to follow your ride; it stops working when the ride ends. Read the <a href="privacy-policy.html">Privacy Policy</a> for details.</p></div></details>
+        <details class="q reveal"><summary>How do I report a problem or delete my account?</summary><div class="a"><p>Report a ride or a person from inside the app, or write to <a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a>. To delete your account and data, see <a href="data-deletion.html">how to delete your data</a> or write to <a href="mailto:privacy@seatmate.com.pk">privacy@seatmate.com.pk</a>.</p></div></details>
+        <details class="q reveal"><summary>Is there an iPhone app?</summary><div class="a"><p>Not yet. Seatmate is available for Android only for now.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ DOWNLOAD ═════════════ -->
+  <section class="download" id="download" aria-labelledby="dl-title">
+    <div class="dl-card reveal">
+      <div>
+        <img class="dl-logo" src="/logo-mark.png" width="84" height="56" alt="">
+        <div class="label"><b>09</b> Download</div>
+        <h2 id="dl-title">Get Seatmate on Android.</h2>
+        <p class="lead-2">Free to download. Find a seat or offer one, and pay the driver directly in cash.</p>
+        <a class="btn js-dl" href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest"><svg aria-hidden="true"><use href="#i-android"/></svg><span class="dl-label">Download for Android</span></a>
+        <p class="dl-meta">Android only &middot; You may need to allow "install unknown apps" when prompted</p>
+        <p class="note-box" style="max-width:56ch">If the download looks stuck near the end and still says "downloading", it has actually finished. Open <strong>Chrome &rsaquo; Downloads</strong> (or pull down your notifications) and tap the file to install it.</p>
+      </div>
+      <div class="dl-phones" aria-hidden="true">
+        <div class="phone"><div class="screen"><img loading="lazy" src="/img/ride.webp" width="600" height="1217" alt=""></div></div>
+        <div class="phone glow-b"><div class="screen"><img loading="lazy" src="/img/post-car.webp" width="600" height="1217" alt=""></div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="company" id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="/" style="margin-bottom:18px"><img src="/logo-mark.png" alt="" width="40" height="27"><span class="wm"><b>Seat</b>mate</span></a>
+        <p class="co">Seatmate is a service of <strong>ALMISHQUN (SMC-PRIVATE) LIMITED</strong>, a company incorporated in Pakistan under the Companies Act, 2017.<br>
+        SECP Corporate Universal Identification No. 0350299<br>
+        House 1027, Street 77, D-12/1, Islamabad, Pakistan<br>
+        <a href="https://almishqun.com">almishqun.com</a></p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#passengers">For passengers</a></li><li><a href="#drivers">For drivers</a></li><li><a href="#features">Features</a></li><li><a href="#fares">Fares</a></li><li><a href="#safety">Safety</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="data-deletion.html">Data Deletion</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Help with the app, a ride or your account<br><a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a></li><li>Privacy questions and data deletion<br><a href="mailto:privacy@seatmate.com.pk">privacy@seatmate.com.pk</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>&copy; 2026 ALMISHQUN (SMC-PRIVATE) LIMITED. All rights reserved.</span><span>Screens shown are from the Seatmate Android app with sample data.</span></div>
+  </div>
+</footer>
+
+<script src="/site.js" defer></script>
 <script>
     // Android in-app browsers (the stripped-down Chrome you get when you tap a
     // link inside WhatsApp, Instagram, Facebook, …) are a Chrome Custom Tab or
@@ -153,23 +392,25 @@
     }
   </script>
 <script>
-    // The button's href above is a safe fallback (GitHub's own "latest
-    // release" redirect) in case this fails. When it works, point it at the
+    // The buttons' href above is a safe fallback (GitHub's own "latest
+    // release" redirect) in case this fails. When it works, point them at the
     // exact asset from latest.json instead — the same file the app itself
     // checks — and show the version so people know what they're installing.
     fetch('latest.json?_=' + Date.now(), { cache: 'no-store' })
       .then((r) => r.json())
       .then((latest) => {
-        var el = document.getElementById('download-link');
-        if (!el || !latest || typeof latest.apkUrl !== 'string') return;
-        el.href = latest.apkUrl;
-        if (latest.versionName) {
-          el.textContent = 'Download for Android (v' + latest.versionName + ')';
-        }
-        escapeInAppBrowser(el, latest.apkUrl);
+        if (!latest || typeof latest.apkUrl !== 'string') return;
+        var buttons = [document.getElementById('download-link')].concat(Array.prototype.slice.call(document.querySelectorAll('a.btn.js-dl')));
+        buttons.forEach(function (el) {
+          if (!el) return;
+          el.href = latest.apkUrl;
+          var label = el.querySelector('.dl-label');
+          if (label && latest.versionName) label.textContent = 'Download for Android (v' + latest.versionName + ')';
+          escapeInAppBrowser(el, latest.apkUrl);
+        });
       })
       .catch(function () {
-        // Fallback href already in the markup. Nothing to do.
+        // Fallback hrefs already in the markup. Nothing to do.
       });
   </script>
 </body>
