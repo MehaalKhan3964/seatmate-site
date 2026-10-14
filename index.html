@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <link rel="preload" href="/fonts/GoogleSans-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/site.css?v=20261014c">
+<link rel="stylesheet" href="/site.css?v=20261014d">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Seatmate">
 <meta property="og:url" content="https://seatmate.com.pk/">
@@ -31,6 +31,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -111,11 +112,46 @@
     </div>
   </section>
 
+  <!-- ═════════════ JOURNEYS ═════════════ -->
+  <section class="section journeys" id="journeys" aria-labelledby="jr-title">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-ghost" aria-hidden="true">01</span>
+        <div class="label"><b>01</b> Rides for every journey</div>
+        <h2 class="h2" id="jr-title">Every trip has a seat to share.</h2>
+        <p class="lead-2">From the daily drive to work to a trip across the country, Seatmate helps people who are already going somewhere find people heading the same way.</p>
+      </div>
+      <div class="jr-grid">
+        <div class="reveal"><article class="jr-card" data-tilt aria-labelledby="jr-1">
+          <div class="jr-media"><img loading="lazy" src="/img/route-aerial.webp" width="1100" height="825" alt="Aerial view of a busy multi-level highway interchange"></div>
+          <div class="jr-body"><p class="jr-tag"><span class="pill"><i></i>Live in the app</span><span class="jr-host">Within a city</span></p>
+          <h3 id="jr-1">Daily commutes</h3>
+          <p>Going to work, university or the market? Find a driver heading your way, or fill the empty seats in your own car or on your motorbike.</p>
+          <a class="btn secondary" href="#passengers">See how it works</a></div>
+        </article></div>
+        <div class="reveal" style="--d:.1s"><article class="jr-card" data-tilt aria-labelledby="jr-2">
+          <div class="jr-media"><img loading="lazy" src="/img/earth-night.webp" width="1000" height="665" alt="Earth at night from orbit, with city lights glowing"></div>
+          <div class="jr-body"><p class="jr-tag"><span class="pill"><i></i>Live in the app</span><span class="jr-host">Intercity</span></p>
+          <h3 id="jr-2">City to city</h3>
+          <p>Planning a longer trip? Post or find intercity rides, with the fare and the seats left shown before you ask.</p>
+          <a class="btn secondary" href="#drivers">Offer a ride</a></div>
+        </article></div>
+        <div class="reveal" style="--d:.2s"><article class="jr-card" data-tilt aria-labelledby="jr-3">
+          <div class="jr-media"><img loading="lazy" src="/img/transit-topology.webp" width="1000" height="558" alt="A desk with a route network map drawn on paper and on a monitor"></div>
+          <div class="jr-body"><p class="jr-tag"><span class="pill"><i></i>Live in the app</span><span class="jr-host">Route matching</span></p>
+          <h3 id="jr-3">Routes that fit</h3>
+          <p>Search by pickup and drop-off and see the closest matches first, with a match score and the time you should arrive.</p>
+          <a class="btn secondary" href="#features">See the features</a></div>
+        </article></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═════════════ PASSENGERS ═════════════ -->
   <section class="section story" id="passengers" aria-labelledby="pax-title">
     <div class="container gallery-head">
       <div class="reveal">
-        <div class="label"><b>01</b> For passengers</div>
+        <span class="section-ghost" aria-hidden="true">02</span><div class="label"><b>02</b> For passengers</div>
         <h2 class="h2" id="pax-title">Find a seat in a few taps.</h2>
         <p class="lead-2">Search your route, compare the rides that match, check the fare and the vehicle, then ask for a seat. Everything you need before you commit is on one screen.</p>
       </div>
@@ -141,7 +177,7 @@
   <section class="section story alt" id="drivers" aria-labelledby="drv-title">
     <div class="container gallery-head">
       <div class="reveal">
-        <div class="label"><b>02</b> For drivers</div>
+        <span class="section-ghost" aria-hidden="true">03</span><div class="label"><b>03</b> For drivers</div>
         <h2 class="h2" id="drv-title">Fill the empty seats.</h2>
         <p class="lead-2">Post the trip you are already making, in a car or on a motorbike. Choose the seats and the fare, accept the requests you want and start the ride with the passenger's code.</p>
       </div>
@@ -161,11 +197,35 @@
     </div>
   </section>
 
+  <!-- ═════════════ IN USE ═════════════ -->
+  <section class="section situ" id="inuse" aria-labelledby="situ-title">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-ghost" aria-hidden="true">04</span>
+        <div class="label"><b>04</b> In use</div>
+        <h2 class="h2" id="situ-title">The app, on the road.</h2>
+        <p class="lead-2">Built for everyday commutes: one app for drivers offering seats and riders heading the same way.</p>
+      </div>
+      <div class="situ-grid">
+        <div class="reveal"><figure class="scene-card" data-scene data-tilt>
+          <div class="scene-bg"><img loading="lazy" src="/img/scene-dash.webp" width="1280" height="714" alt="A driver at night with a navigation screen on the dashboard"></div>
+          <div class="scene-fg"><div class="phone static"><div class="screen"><img loading="lazy" src="/img/manage.webp" width="600" height="1217" alt="Seatmate driver screen with a passenger request to accept or reject"></div></div></div>
+          <figcaption><span class="fig-index">01</span>On the dash, mid-trip</figcaption>
+        </figure></div>
+        <div class="reveal" style="--d:.1s"><figure class="scene-card" data-scene data-tilt>
+          <div class="scene-bg studio"><span class="studio-fill" aria-hidden="true"></span></div>
+          <div class="scene-fg"><div class="phone static glow-b"><div class="screen"><img loading="lazy" src="/img/ticket.webp" width="600" height="1217" alt="Seatmate boarding code ticket"></div></div></div>
+          <figcaption><span class="fig-index">02</span>Boarding code, glowing at pickup</figcaption>
+        </figure></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═════════════ BENEFITS ═════════════ -->
   <section class="section" aria-labelledby="ben-title">
     <div class="container">
       <div class="reveal">
-        <div class="label"><b>03</b> Why Seatmate</div>
+        <span class="section-ghost" aria-hidden="true">05</span><div class="label"><b>05</b> Why Seatmate</div>
         <h2 class="h2 wide" id="ben-title">One account. Two ways to travel.</h2>
       </div>
       <div class="split">
@@ -197,7 +257,7 @@
   <section class="section" id="features" aria-labelledby="feat-title" style="padding-top:0">
     <div class="container">
       <div class="reveal">
-        <div class="label"><b>04</b> What's in the app</div>
+        <span class="section-ghost" aria-hidden="true">06</span><div class="label"><b>06</b> What's in the app</div>
         <h2 class="h2 wide" id="feat-title">Built for how Pakistan commutes.</h2>
         <p class="lead-2">The features below are in the Android app you can download today. What is coming next is shown separately further down.</p>
       </div>
@@ -220,7 +280,7 @@
   <section class="section fare" id="fares" aria-labelledby="fare-title">
     <div class="container">
       <div class="reveal">
-        <div class="label"><b>05</b> Fares and arrangements</div>
+        <span class="section-ghost" aria-hidden="true">07</span><div class="label"><b>07</b> Fares and arrangements</div>
         <h2 class="h2 wide" id="fare-title">See the fare before you ask.</h2>
       </div>
       <div class="fare-grid">
@@ -245,7 +305,7 @@
   <section class="section story alt next" id="next" aria-labelledby="next-title" style="padding-bottom:40px">
     <div class="container gallery-head">
       <div class="reveal">
-        <div class="label"><b>06</b> Next update</div>
+        <span class="section-ghost" aria-hidden="true">08</span><div class="label"><b>08</b> Next update</div>
         <h2 class="h2 wide" id="next-title">What we're shipping next.</h2>
         <p class="lead-2">These are built and being rolled out. They are not in the current Android download yet, so you may not see them until the next app update.</p>
       </div>
@@ -265,11 +325,25 @@
     </div>
   </section>
 
+  <!-- ═════════════ DEPTH INTERLUDE ═════════════ -->
+  <section class="depth" aria-labelledby="depth-title">
+    <div class="depth-stage">
+      <div class="depth-plane depth-plane-bg" aria-hidden="true"><img loading="lazy" src="/img/depth-bg.webp" width="1600" height="893" alt=""></div>
+      <div class="depth-scrim" aria-hidden="true"></div>
+      <div class="depth-copy fade">
+        <p class="depth-eyebrow">Why carpooling</p>
+        <h2 class="depth-title" id="depth-title">Every city has a rush hour, <span class="depth-accent">and empty seats in it.</span></h2>
+        <p class="depth-lede">Traffic, fuel costs and crowded roads are shared by everyone on them. Seatmate helps the people who are already driving meet the people already going the same way, so every car can carry more.</p>
+      </div>
+      <div class="depth-plane depth-plane-fg" aria-hidden="true"><img loading="lazy" src="/img/route-aerial.webp" width="1100" height="825" alt=""></div>
+    </div>
+  </section>
+
   <!-- ═════════════ SAFETY ═════════════ -->
   <section class="section" id="safety" aria-labelledby="safety-title">
     <div class="container">
       <div class="reveal">
-        <div class="label"><b>07</b> Safety and trust</div>
+        <span class="section-ghost" aria-hidden="true">09</span><div class="label"><b>09</b> Safety and trust</div>
         <h2 class="h2 wide" id="safety-title">Tools that help you travel with care.</h2>
         <p class="lead-2">Seatmate gives you ways to know who you are riding with and to reach someone if you need to. It is a set of tools, not a guarantee: use your own judgement on every ride.</p>
       </div>
@@ -294,7 +368,7 @@
   <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
     <div class="container faq-wrap">
       <div class="reveal">
-        <div class="label"><b>08</b> Questions</div>
+        <span class="section-ghost" aria-hidden="true">10</span><div class="label"><b>10</b> Questions</div>
         <h2 class="h2" id="faq-title" style="max-width:9ch">Good to know.</h2>
         <p class="lead-2">Can't find your answer? Write to <a href="mailto:support@seatmate.com.pk">support@seatmate.com.pk</a>.</p>
       </div>
@@ -318,7 +392,7 @@
     <div class="dl-card reveal">
       <div>
         <img class="dl-logo" src="/logo-mark.png" width="84" height="56" alt="">
-        <div class="label"><b>09</b> Download</div>
+        <div class="label"><b>11</b> Download</div>
         <h2 id="dl-title">Get Seatmate on Android.</h2>
         <p class="lead-2">Free to download. Find a seat or offer one, and pay the driver directly in cash.</p>
         <a class="btn js-dl" href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest"><svg aria-hidden="true"><use href="#i-android"/></svg><span class="dl-label">Download for Android</span></a>
@@ -352,7 +426,7 @@
   </div>
 </footer>
 
-<script src="/site.js?v=20261014c" defer></script>
+<script src="/site.js?v=20261014d" defer></script>
 <script>
     // Android in-app browsers (the stripped-down Chrome you get when you tap a
     // link inside WhatsApp, Instagram, Facebook, …) are a Chrome Custom Tab or

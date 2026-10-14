@@ -22,7 +22,7 @@
   }
 
   // reveal on scroll
-  var items = document.querySelectorAll('.reveal');
+  var items = document.querySelectorAll('.reveal, .fade');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -73,9 +73,8 @@
 
   // devices tilt toward the pointer, with a soft glare that follows it (almishqun.com: rotationX = -6 * y, rotationY = 7 * x)
   if (finePointer && !reduceMotion) {
-    document.querySelectorAll('.phone').forEach(function (phone) {
-      var screen = phone.querySelector('.screen');
-      if (!screen) return;
+    document.querySelectorAll('.phone:not(.static), [data-tilt]:not([data-scene])').forEach(function (phone) {
+      var screen = phone.querySelector('.screen') || phone;
       var glare = document.createElement('div');
       glare.className = 'scene-glare';
       glare.setAttribute('aria-hidden', 'true');
@@ -165,5 +164,72 @@
     window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(syncPins, 120); });
     window.addEventListener('load', syncPins);
     syncPins();
+  }
+  // scroll progress hairline at the very top
+  var progress = document.querySelector('.scroll-progress span');
+  if (progress) {
+    var onProgress = function () {
+      var max = document.body.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0).toFixed(4) + ')';
+    };
+    onProgress();
+    window.addEventListener('scroll', onProgress, { passive: true });
+    window.addEventListener('resize', onProgress);
+  }
+
+  // primary buttons lean toward the pointer, then settle back (almishqun.com: clamp +-6px x, +-5px y)
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.hero .cta-row .btn, .dl-card .btn').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = clamp((e.clientX - (r.left + r.width / 2)) * 0.22, -6, 6);
+        var y = clamp((e.clientY - (r.top + r.height / 2)) * 0.3, -5, 5);
+        btn.style.translate = x.toFixed(1) + 'px ' + y.toFixed(1) + 'px';
+      });
+      btn.addEventListener('pointerleave', function () { btn.style.translate = '0px 0px'; });
+    });
+  }
+
+  // scene cards: the cursor splits the layers (the phone counter-moves harder than the backdrop) while the whole card tilts and a glare follows
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.scene-card[data-scene]').forEach(function (card) {
+      var glare = document.createElement('div');
+      glare.className = 'scene-glare';
+      glare.setAttribute('aria-hidden', 'true');
+      card.appendChild(glare);
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.setProperty('--rx', (py * -7).toFixed(2) + 'deg');
+        card.style.setProperty('--ry', (px * 9).toFixed(2) + 'deg');
+        card.style.setProperty('--bgx', (px * -10).toFixed(1) + 'px');
+        card.style.setProperty('--bgy', (py * -8).toFixed(1) + 'px');
+        card.style.setProperty('--fgx', (px * 26).toFixed(1) + 'px');
+        card.style.setProperty('--fgy', (py * 20).toFixed(1) + 'px');
+        glare.style.transform = 'translate(' + (px * r.width * 0.9).toFixed(1) + 'px,' + (py * r.height * 0.9).toFixed(1) + 'px)';
+        glare.style.opacity = '1';
+      });
+      card.addEventListener('pointerleave', function () {
+        ['--rx', '--ry'].forEach(function (k) { card.style.setProperty(k, '0deg'); });
+        ['--bgx', '--bgy', '--fgx', '--fgy'].forEach(function (k) { card.style.setProperty(k, '0px'); });
+        glare.style.opacity = '0';
+      });
+    });
+  }
+
+  // depth interlude: the photo plane and the foreground card scrub at different speeds as the section crosses the viewport
+  var stage = document.querySelector('.depth-stage');
+  if (stage && !reduceMotion) {
+    var dbg = stage.querySelector('.depth-plane-bg');
+    var dfg = stage.querySelector('.depth-plane-fg');
+    var depth = function () {
+      var r = stage.getBoundingClientRect();
+      var p = clamp((window.innerHeight - r.top) / (window.innerHeight + r.height), 0, 1);
+      if (dbg) dbg.style.transform = 'translate3d(0,' + (-5 + 10 * p).toFixed(2) + '%,0)';
+      if (dfg) dfg.style.transform = 'translate3d(0,' + (16 - 32 * p).toFixed(2) + '%,0)';
+    };
+    depth();
+    window.addEventListener('scroll', depth, { passive: true });
   }
 })();
