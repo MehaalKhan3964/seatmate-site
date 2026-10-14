@@ -24,7 +24,7 @@ for (const f of pages) {
   const canon = /<link rel="canonical" href="([^"]+)"/.exec(s);
   const expected = f === 'index.html' || f === '404.html' ? ORIGIN : ORIGIN + f;
   check(`${f}: canonical is ${expected}`, !!canon && canon[1] === expected, canon && canon[1]);
-  check(`${f}: shared stylesheet, no inline style block`, s.includes('href="/site.css"') && !/<style>/.test(s));
+  check(`${f}: shared stylesheet, no inline style block`, /href="\/site\.css(\?v=[\w.]+)?"/.test(s) && !/<style>/.test(s));
   check(`${f}: no third-party script, stylesheet or font`, !/(<script[^>]+src="https?:|<link[^>]+href="https?:\/\/(?!seatmate\.com\.pk)[^"]*(css|font)|fonts\.googleapis|cdn\.)/i.test(s));
   check(`${f}: no placeholder text`, !/lorem|coming soon|todo|tbd|\[OWNER/i.test(s));
 }
@@ -38,7 +38,7 @@ for (const f of pages) {
     const h = m[1];
     if (/^(https?:|mailto:|data:)/.test(h)) continue;
     if (h.startsWith('#')) { check(`${f}: anchor ${h} exists`, ids.has(h.slice(1))); continue; }
-    const target = h === '/' ? 'index.html' : h.replace(/^\//, '').split('#')[0];
+    const target = h === '/' ? 'index.html' : h.replace(/^\//, '').split('#')[0].split('?')[0];
     check(`${f}: link ${h} resolves`, fs.existsSync(path.join(root, target)));
   }
 }

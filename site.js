@@ -67,4 +67,103 @@
       requestAnimationFrame(loop);
     })();
   }
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+
+  // devices tilt toward the pointer, with a soft glare that follows it (almishqun.com: rotationX = -6 * y, rotationY = 7 * x)
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.phone').forEach(function (phone) {
+      var screen = phone.querySelector('.screen');
+      if (!screen) return;
+      var glare = document.createElement('div');
+      glare.className = 'scene-glare';
+      glare.setAttribute('aria-hidden', 'true');
+      screen.appendChild(glare);
+      phone.addEventListener('pointermove', function (e) {
+        var r = phone.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        phone.style.setProperty('--rx', (py * -7).toFixed(2) + 'deg');
+        phone.style.setProperty('--ry', (px * 8).toFixed(2) + 'deg');
+        glare.style.transform = 'translate(' + (px * r.width * 0.8).toFixed(1) + 'px,' + (py * r.height * 0.8).toFixed(1) + 'px)';
+        glare.style.opacity = '1';
+      });
+      phone.addEventListener('pointerleave', function () {
+        phone.style.setProperty('--rx', '0deg');
+        phone.style.setProperty('--ry', '0deg');
+        glare.style.opacity = '0';
+      });
+    });
+  }
+
+  // pinned horizontal slideshow (almishqun.com "showcase"): from 48rem up the section pins and the scroll position slides the phones sideways;
+  // each panel rotates in from a slight 3D angle as it arrives. Below 48rem, or with reduced motion, the gallery stays a native swipe row.
+  var pins = [];
+  function buildPin(gallery) {
+    var outer = document.createElement('div'); outer.className = 'pin-outer';
+    var stage = document.createElement('div'); stage.className = 'pin-stage';
+    var bar = document.createElement('div'); bar.className = 'pin-progress'; bar.setAttribute('aria-hidden', 'true');
+    var fill = document.createElement('span'); bar.appendChild(fill);
+    var shots = Array.prototype.slice.call(gallery.querySelectorAll('.shot'));
+    var head = gallery.previousElementSibling;
+    var state = { on: false, distance: 0 };
+    function gnav() { return head && head.querySelector ? head.querySelector('.gnav') : null; }
+    state.enable = function () {
+      if (state.on) return;
+      gallery.parentNode.insertBefore(outer, gallery);
+      outer.appendChild(stage); stage.appendChild(gallery); stage.appendChild(bar);
+      gallery.classList.add('is-pinned');
+      shots.forEach(function (s) { s.classList.add('in'); });
+      var g = gnav(); if (g) g.style.display = 'none';
+      state.on = true; state.measure();
+    };
+    state.disable = function () {
+      if (!state.on) return;
+      outer.parentNode.insertBefore(gallery, outer);
+      outer.remove();
+      gallery.classList.remove('is-pinned'); gallery.style.transform = '';
+      shots.forEach(function (s) { s.style.transform = ''; s.style.opacity = ''; });
+      var g = gnav(); if (g) g.style.display = '';
+      state.on = false;
+    };
+    state.measure = function () {
+      gallery.style.transform = 'none';
+      state.distance = Math.max(0, gallery.scrollWidth - window.innerWidth);
+      outer.style.height = (window.innerHeight + state.distance) + 'px';
+      state.update();
+    };
+    state.update = function () {
+      if (!state.on) return;
+      var top = outer.getBoundingClientRect().top;
+      var progress = state.distance > 0 ? clamp(-top / state.distance, 0, 1) : 0;
+      gallery.style.transform = 'translate3d(' + (-progress * state.distance).toFixed(1) + 'px,0,0)';
+      fill.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+      var vw = window.innerWidth;
+      shots.forEach(function (s) {
+        var t = clamp((vw - s.getBoundingClientRect().left) / (vw * 0.45), 0, 1);
+        s.style.transform = 'perspective(75rem) rotateY(' + (14 * (1 - t)).toFixed(2) + 'deg) scale(' + (0.94 + 0.06 * t).toFixed(3) + ')';
+        s.style.opacity = (0.45 + 0.55 * t).toFixed(3);
+      });
+    };
+    return state;
+  }
+  var pinMq = window.matchMedia('(min-width: 48rem)');
+  function syncPins() {
+    var want = pinMq.matches && !reduceMotion;
+    pins.forEach(function (p) { if (want) { if (p.on) { p.measure(); } else { p.enable(); } } else { p.disable(); } });
+  }
+  if (!reduceMotion) {
+    document.querySelectorAll('.story .gallery').forEach(function (g) { pins.push(buildPin(g)); });
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; pins.forEach(function (p) { p.update(); }); });
+    }, { passive: true });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(syncPins, 120); });
+    window.addEventListener('load', syncPins);
+    syncPins();
+  }
 })();

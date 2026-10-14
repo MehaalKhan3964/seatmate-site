@@ -157,19 +157,34 @@ section { position: relative; }
 .inapp-warn.show { display: block; }
 .hero-phones { position: relative; height: 100%; min-height: 560px; align-self: end; }
 .hero-phones .phone { position: absolute; bottom: -60px; }
-.hero-phones .p1 { left: 2%; width: 41%; transform: rotate(-6deg); z-index: 1; animation: floatA 8s ease-in-out infinite; }
+.hero-phones .p1 { left: 2%; width: 41%; --base: -6deg; z-index: 1; animation: floatA 8s ease-in-out infinite; }
 .hero-phones .p2 { left: 29%; width: 46%; z-index: 3; bottom: -20px; animation: floatB 9s ease-in-out infinite; }
-.hero-phones .p3 { right: 0; width: 41%; transform: rotate(6deg); z-index: 2; animation: floatA 10s ease-in-out infinite reverse; }
+.hero-phones .p3 { right: 0; width: 41%; --base: 6deg; z-index: 2; animation: floatA 10s ease-in-out infinite reverse; }
 @keyframes floatA { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
 @keyframes floatB { 0%, 100% { translate: 0 0; } 50% { translate: 0 -20px; } }
 
 /* ───────────────────────── phone mockup ───────────────────────── */
-.phone { position: relative; border-radius: 15% / 7%; padding: 7.2% 2.4% 2.6%; background: linear-gradient(160deg, #2a3350, #0d111c 55%, #1b2238); box-shadow: 0 0 0 1px rgba(160, 176, 214, .28), 0 40px 80px -20px rgba(0, 0, 0, .7), 0 0 90px -10px var(--glow); }
+.phone { --rx: 0deg; --ry: 0deg; --base: 0deg; transform: rotate(var(--base)) perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease; position: relative; border-radius: 15% / 7%; padding: 7.2% 2.4% 2.6%; background: linear-gradient(160deg, #2a3350, #0d111c 55%, #1b2238); box-shadow: 0 0 0 1px rgba(160, 176, 214, .28), 0 40px 80px -20px rgba(0, 0, 0, .7), 0 0 90px -10px var(--glow); }
 .phone .screen { position: relative; border-radius: 6% / 3%; overflow: hidden; background: #000; aspect-ratio: 600 / 1217; }
 .phone .screen img { width: 100%; height: 100%; object-fit: cover; }
 .phone .screen.tall { aspect-ratio: 600 / 1079; }
 .phone::before { content: ""; position: absolute; top: 2.6%; left: 50%; translate: -50% 0; width: 24%; height: 1.5%; background: #05070c; border-radius: 99px; z-index: 3; }
 .phone.glow-b { box-shadow: 0 0 0 1px rgba(160, 176, 214, .28), 0 40px 80px -20px rgba(0, 0, 0, .7), 0 0 90px -10px var(--glow-2); }
+
+/* ───────────────────────── device interaction (as on almishqun.com): pointer tilt with a soft glare, accent frame on hover ───────────────────────── */
+.scene-glare { position: absolute; left: 50%; top: 50%; width: 70%; aspect-ratio: 1; margin: -35% 0 0 -35%; border-radius: 50%; background: rgba(255, 255, 255, .22); filter: blur(2.6rem); pointer-events: none; opacity: 0; transition: opacity .3s ease; z-index: 4; mix-blend-mode: soft-light; }
+@media (pointer: fine) and (hover: hover) {
+  .phone:hover { box-shadow: 0 0 0 1.5px var(--accent), 0 50px 100px -24px rgba(0, 0, 0, .75), 0 0 110px -6px var(--glow-2); }
+}
+
+/* ───────────────────────── pinned, scroll-scrubbed slideshow (desktop): the section pins while the phones slide past and each panel rotates in ───────────────────────── */
+.pin-outer { position: relative; }
+.pin-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+.gallery.is-pinned { overflow: visible; scroll-snap-type: none; width: max-content; padding: 0 34vw 0 max(24px, calc((100vw - 1240px) / 2 + 24px)); margin: 0; will-change: transform; }
+.gallery.is-pinned .shot { flex-basis: clamp(210px, 34vh, 300px); will-change: transform, opacity; }
+.gallery.is-pinned .shot.reveal { transition: none; }
+.pin-progress { position: absolute; left: 50%; bottom: clamp(18px, 5vh, 56px); translate: -50% 0; width: min(20rem, 40%); height: 2px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.pin-progress span { display: block; height: 100%; background: var(--primary); transform-origin: left center; transform: scaleX(0); }
 
 /* ───────────────────────── marquee ───────────────────────── */
 .marquee { margin: 56px 0 0; border-block: 1px solid var(--border); overflow: hidden; background: rgba(255, 255, 255, .015); }
@@ -274,8 +289,8 @@ details.q .a p:last-child { margin-bottom: 0; }
 .dl-meta { font-family: var(--mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 18px; }
 .dl-phones { position: relative; min-height: 420px; }
 .dl-phones .phone { position: absolute; width: 46%; }
-.dl-phones .phone:first-child { left: 2%; top: 0; transform: rotate(-5deg); }
-.dl-phones .phone:last-child { right: 2%; top: 56px; transform: rotate(5deg); }
+.dl-phones .phone:first-child { left: 2%; top: 0; --base: -5deg; }
+.dl-phones .phone:last-child { right: 2%; top: 56px; --base: 5deg; }
 .dl-logo { width: 84px; margin-bottom: 26px; }
 
 /* ───────────────────────── footer ───────────────────────── */
