@@ -174,3 +174,14 @@ It does **not** test the live domain or the layout. After a deploy, check by han
 ## Design
 
 `site.css` is the one stylesheet. Its tokens follow the app (cream paper, deep green primary, rust accent) and the parent company site almishqun.com (warm paper, ink and rust accent, hairline borders, flat surfaces). System fonts only. A dark scheme follows the visitor's setting. The legal text on the policy pages is unchanged; only the presentation and metadata changed.
+
+# The site itself: design, assets and publishing
+
+*(Added 2026-10-14. The APK procedure above is unchanged.)*
+
+- **What it is:** a static site (no build step) served by GitHub Pages behind Cloudflare. `index.html` is the product page; `privacy-policy.html`, `terms-of-service.html`, `data-deletion.html` and `404.html` share `site.css` and `site.js`. The visual language follows almishqun.com (reference source: `C:\Project\Research\almishqun-technologies-website\v3`): near-black blue canvas, Google Sans and JetBrains Mono (self-hosted in `fonts/`, SIL OFL), heading scale `clamp(2.9rem, 7vw, 6.5rem)`, ghost numerals, marquee, glowing phone mockups, cursor dot and ring, device tilt, pinned slideshow, scene cards, depth interlude, scroll-progress hairline, magnetic buttons, film grain (`grain.svg`).
+- **Screens and images:** `img/*.webp` are real app screens captured from the dev client against DEV (cropped of the status and navigation bars, 600 px wide) plus a few Almishqun/Unsplash photos (`scene-dash`, `depth-bg`, `route-aerial`, `earth-night`, `transit-topology`). Screens are described as sample data in the footer. Do not add stats, testimonials, partners or fee claims.
+- **Positioning rule (owner, 2026-10-14):** Seatmate is a carpooling platform for Pakistan. No copy may present it as limited to Islamabad and Rawalpindi; the company's registered address is identity, not positioning. Features that are not in the published APK carry the "Next update" badge until a build containing them is released.
+- **Cache rule:** Cloudflare caches `site.css` and `site.js` for four hours. All pages link them as `/site.css?v=<token>` and `/site.js?v=<token>`; **change the token in all five HTML files whenever either file changes** (today `20261014e`).
+- **Before every push:** `node scripts/check-site.mjs` must print "all passed" (positioning, assets, sections, labels, no stat claims, contact addresses, company details, download logic). Then push `main`; Pages deploys in about a minute. Verify the live pages (curl or a browser with a cache-busted URL), `latest.json` and `.well-known/assetlinks.json`.
+- **Not done:** the server-side HTTP to HTTPS redirect (Cloudflare "Always Use HTTPS" or Pages "Enforce HTTPS"; the pages carry a client-side fallback), a Lighthouse run, a dedicated support page.
