@@ -51,7 +51,7 @@
     root.classList.add('has-cursor');
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var mx = 0, my = 0, rx = 0, ry = 0, started = false;
-    var HOVER = 'a, button, summary, input, textarea, select, label, [role="button"], .shot, .cell';
+    var HOVER = 'a, button, summary, input, textarea, .shot, .cell'; // almishqun.com: a, button, [data-tilt], .scene-card, input, textarea, summary
     window.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY;
       if (!started) { started = true; rx = mx; ry = my; root.classList.add('cursor-on'); }
@@ -61,8 +61,8 @@
     document.addEventListener('mouseleave', function () { root.classList.remove('cursor-on'); });
     document.addEventListener('mouseenter', function () { if (started) root.classList.add('cursor-on'); });
     (function loop() {
-      rx += (mx - rx) * (reduce ? 1 : 0.18);
-      ry += (my - ry) * (reduce ? 1 : 0.18);
+      rx += (mx - rx) * (reduce ? 1 : 0.14);
+      ry += (my - ry) * (reduce ? 1 : 0.14);
       ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
       requestAnimationFrame(loop);
     })();

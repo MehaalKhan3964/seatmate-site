@@ -292,13 +292,14 @@ footer.company .co strong { color: var(--muted); }
 
 /* ───────────────────────── cursor (same idea as almishqun.com: native pointer kept, an accent dot and a trailing hairline ring added for mouse users) ───────────────────────── */
 .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; z-index: 96; border-radius: 50%; pointer-events: none; display: none; }
-.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--accent); mix-blend-mode: difference; }
-.cursor-ring { width: 48px; height: 48px; margin: -24px 0 0 -24px; border: 1px solid var(--muted); opacity: .6; transition: scale .25s ease, opacity .25s ease, border-color .25s ease; }
+.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--accent); mix-blend-mode: difference; transition: opacity .2s ease; }
+.cursor-ring { width: 48px; height: 48px; margin: -24px 0 0 -24px; border: 1px solid var(--muted); opacity: .6; transition: scale .3s cubic-bezier(.22,.61,.36,1), opacity .25s ease; }
 @media (pointer: fine) and (hover: hover) {
   .has-cursor .cursor-dot, .has-cursor .cursor-ring { display: block; opacity: 0; }
   .has-cursor.cursor-on .cursor-dot { opacity: 1; }
   .has-cursor.cursor-on .cursor-ring { opacity: .6; }
-  .has-cursor.cursor-hover .cursor-ring { scale: 1.55; opacity: .9; border-color: var(--primary); }
+  .has-cursor.cursor-hover .cursor-ring { scale: 1.7; }
+  .has-cursor.cursor-hover .cursor-dot { opacity: 0; }
 }
 @media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none !important; } }
 
