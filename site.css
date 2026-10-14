@@ -290,6 +290,18 @@ footer.company .co { font-size: .9rem; color: var(--dim); line-height: 1.7; }
 footer.company .co strong { color: var(--muted); }
 .foot-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: .86rem; color: var(--dim); }
 
+/* ───────────────────────── cursor (same idea as almishqun.com: native pointer kept, an accent dot and a trailing hairline ring added for mouse users) ───────────────────────── */
+.cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; z-index: 96; border-radius: 50%; pointer-events: none; display: none; }
+.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--accent); mix-blend-mode: difference; }
+.cursor-ring { width: 48px; height: 48px; margin: -24px 0 0 -24px; border: 1px solid var(--muted); opacity: .6; transition: scale .25s ease, opacity .25s ease, border-color .25s ease; }
+@media (pointer: fine) and (hover: hover) {
+  .has-cursor .cursor-dot, .has-cursor .cursor-ring { display: block; opacity: 0; }
+  .has-cursor.cursor-on .cursor-dot { opacity: 1; }
+  .has-cursor.cursor-on .cursor-ring { opacity: .6; }
+  .has-cursor.cursor-hover .cursor-ring { scale: 1.55; opacity: .9; border-color: var(--primary); }
+}
+@media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none !important; } }
+
 /* ───────────────────────── responsive ───────────────────────── */
 @media (max-width: 1020px) {
   .nav-toggle { display: block; }
