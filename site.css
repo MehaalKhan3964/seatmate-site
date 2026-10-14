@@ -334,8 +334,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
 .jr-card:hover .jr-media img { transform: scale(1.1); }
 .jr-body { padding: 26px 28px 30px; }
 .jr-tag { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; flex-wrap: wrap; }
-.pill { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px 5px 9px; border-radius: 999px; color: var(--primary); border: 1px solid rgba(62, 207, 148, .45); background: rgba(62, 207, 148, .08); }
-.pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 10px 1px var(--glow); }
+.tag-pill { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px 5px 9px; border-radius: 999px; color: var(--primary); border: 1px solid rgba(62, 207, 148, .45); background: rgba(62, 207, 148, .08); }
+.tag-pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 10px 1px var(--glow); }
 .jr-host { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
 .jr-body h3 { font-size: 1.7rem; margin-bottom: 8px; letter-spacing: -.02em; }
 .jr-body p:not(.jr-tag) { margin: 0 0 22px; }
