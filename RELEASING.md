@@ -185,3 +185,10 @@ It does **not** test the live domain or the layout. After a deploy, check by han
 - **Cache rule:** Cloudflare caches `site.css` and `site.js` for four hours. All pages link them as `/site.css?v=<token>` and `/site.js?v=<token>`; **change the token in all five HTML files whenever either file changes** (today `20261014e`).
 - **Before every push:** `node scripts/check-site.mjs` must print "all passed" (positioning, assets, sections, labels, no stat claims, contact addresses, company details, download logic). Then push `main`; Pages deploys in about a minute. Verify the live pages (curl or a browser with a cache-busted URL), `latest.json` and `.well-known/assetlinks.json`.
 - **Not done:** the server-side HTTP to HTTPS redirect (Cloudflare "Always Use HTTPS" or Pages "Enforce HTTPS"; the pages carry a client-side fallback), a Lighthouse run, a dedicated support page.
+
+## Release log
+
+| Tag | versionCode | Asset | Notes |
+|---|---|---|---|
+| `v1.0.0` | 6 | `seatmate-1.0.0-vc6.apk` | 2026-09-08; kept as the fallback |
+| `v1.0.0-vc12` | 12 | `seatmate-1.0.0-vc12.apk`, 60,279,234 bytes, SHA-256 `ca943844ac35d76b1b9dc86830f1f561e29f074e341d99e754f90b8e2a89fd3b` | 2026-10-18; EAS release key (cert SHA-256 `bfedf1c3...f3df`). Because `versionName` repeated (1.0.0), the tag carries the `-vc12` suffix. Rolling `latest.json` back does not downgrade phones already on vc12. |
