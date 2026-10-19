@@ -73,7 +73,7 @@ check('landing-page claims stay accurate: no "verified driver", no fee promise, 
 for (const f of pages) { const txt = read(f).replace(/House 1027, Street 77, D-12\/1, Islamabad, Pakistan/g, ''); check(`${f}: no city-exclusive positioning`, !/islamabad|rawalpindi|twin cit/i.test(txt)); }
 check('every image and font referenced by the landing page exists', [...idx.matchAll(/(?:src|href)="(\/(?:img|fonts)\/[^"]+)"/g)].every((m) => fs.existsSync(path.join(root, m[1].slice(1)))));
 check('landing page carries every required section', ['id="passengers"', 'id="drivers"', 'id="features"', 'id="fares"', 'id="safety"', 'id="faq"', 'id="download"'].every((t) => idx.includes(t)));
-check('latest-update features are labelled by status, and no stale "not in the current download" claim remains', (idx.match(/badge-next/g) || []).length >= 6 && /Not switched on yet/.test(idx) && /In the latest update/.test(idx) && !/not in the current Android download yet/.test(idx) && !/Coming in the next update/.test(idx));
+check('latest-update features are labelled by status, and no stale "not in the current download" claim remains', (idx.match(/badge-next/g) || []).length >= 6 && /Rolling out/.test(idx) && /In the latest update/.test(idx) && !/not in the current Android download yet/.test(idx) && !/Coming in the next update/.test(idx) && !/not switched on|not available today/i.test(idx));
 check('no price, rating or user-count claims on the landing page', !/\d[\d,.]*\s*(\+|k)?\s*(users|riders|drivers|rides|downloads)/i.test(idx.replace(/<script[\s\S]*?<\/script>/g, '')));
 
 console.log(failed === 0 ? '\nsite checks: all passed' : `\nsite checks: ${failed} FAILED`);
