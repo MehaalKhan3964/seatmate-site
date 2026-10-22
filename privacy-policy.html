@@ -53,8 +53,8 @@
       <li><strong>Supabase</strong>: our database, sign-in service, file storage and server functions. It also sends your email sign-in codes through its email delivery.</li>
       <li><strong>Meta (WhatsApp Business Cloud API)</strong>: delivers your phone sign-in code as a WhatsApp message, and delivers the message to your emergency contact (section 4). Meta receives the recipient's phone number and the message text so it can deliver them. We do not use WhatsApp for anything else.</li>
       <li><strong>Resend</strong>: sends the verification email if you choose to verify your email address.</li>
-      <li><strong>Google</strong>: Google Sign-In, Google Maps (maps load on your device; place, route and distance lookups are made by our servers), and Firebase Cloud Messaging, which delivers push notifications and may receive a device or installation identifier for that purpose.</li>
-      <li><strong>Expo</strong>: delivers app updates. When the app starts it asks Expo's update service whether a newer version exists; Expo can see your IP address and receives your platform and app version. Expo's push service may also be used to deliver notifications.</li>
+      <li><strong>Google</strong>: Google Sign-In; Google Maps (the map in the app sends technical information to Google, including your device model and operating-system version, crash information, your IP address and an SDK identifier, and our servers send place, route and distance requests to Google); and Firebase Cloud Messaging and Firebase Installations, which deliver push notifications and use an app-installation identifier and the app version.</li>
+      <li><strong>Expo</strong>: delivers app updates and push notifications. When the app starts it asks Expo's update service whether a newer version exists, sending your platform, app version and a random client identifier; Expo can see your IP address. Our servers send each notification's text and your push token to Expo's push service, which passes it to Google's Firebase Cloud Messaging.</li>
     </ul>
     <p>Other Seatmate users see the parts of your profile and rides that are relevant to them: name, profile photo, rating, ride details and the vehicle on rides you join or post. We may share information if the law requires it, for example in response to a lawful request from a competent authority in Pakistan.</p>
 
@@ -67,7 +67,7 @@
       <li>Notification history and sign-in records are deleted after 90 days.</li>
     </ul>
     <p>We do not yet apply automatic deletion periods to verification document images, support cases, safety reports, audit records, push tokens or ride history after an account is deleted. These are kept as described in section 5 for as long as they are needed for safety, disputes and legal duties, and we will update this page when we set fixed periods.</p>
-    <p>Our database provider may keep backups for a limited time, so deleted data can remain in a backup until it expires. We will state the backup period on this page once we have confirmed it.</p>
+    <p>We do not currently keep scheduled backups of the database, so deleted data does not reappear from a backup. If we add backups, deleted data may remain in a backup until it expires and we will state that period on this page.</p>
 
     <h2>4. Your emergency contact</h2>
     <p>You can add one person as your emergency contact. <strong>Seatmate does not ask that person for permission before contacting them</strong>; please add only someone who knows you are doing this.</p>
