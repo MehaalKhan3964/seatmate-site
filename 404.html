@@ -19,11 +19,8 @@
     <p id="message">Carpooling in Pakistan.</p>
     <p id="ride-id-line" hidden></p>
     <div class="links">
-      <a class="link download" id="download-link"
-         href="https://github.com/MehaalKhan3964/seatmate-site/releases/latest">
-        Download for Android
-      </a>
-      <p class="download-note">Android only. You may need to allow "install unknown apps" when prompted.</p>
+      <a class="link download" id="download-link" href="https://play.google.com/store/apps/details?id=pk.seatmate.app" rel="noopener">Get it on Google Play</a>
+      <p class="download-note">Android only. Installs from Google Play.</p>
       <a class="link" href="/">Seatmate Home</a>
     </div>
   </div>
@@ -59,23 +56,6 @@
           "That page doesn't exist. Head back to the Seatmate homepage below.";
       }
     })();
-
-    // Same download-link upgrade as index.html: point at the exact latest
-    // release asset when latest.json is reachable, falling back to GitHub's
-    // "latest release" redirect (already in the markup above) otherwise.
-    fetch('/latest.json?_=' + Date.now(), { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((latest) => {
-        var el = document.getElementById('download-link');
-        if (!el || !latest || typeof latest.apkUrl !== 'string') return;
-        el.href = latest.apkUrl;
-        if (latest.versionName) {
-          el.textContent = 'Download for Android (v' + latest.versionName + ')';
-        }
-      })
-      .catch(function () {
-        // Fallback href already in the markup. Nothing to do.
-      });
   </script>
 <script src="/site.js?v=20261014e" defer></script>
 </body>
