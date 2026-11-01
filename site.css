@@ -409,3 +409,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
   .reveal { opacity: 1; transform: none; transition: none; }
   .stars, .marquee-track, .hero-phones .phone { animation: none; }
 }
+
+/* Official Google Play badge: shown unaltered, linked to the store listing */
+.play-badge { display: inline-block; line-height: 0; }
+.play-badge img { display: block; height: 76px; width: auto; }
+@media (max-width: 600px) { .play-badge img { height: 64px; } }
